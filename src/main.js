@@ -4,3 +4,9 @@ import '@fontsource/inter/600.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
 import './style.css';
+
+import { headerTemplate } from './components/header/header.js';
+import { footerTemplate } from './components/footer/footer.js';
+
+document.body.insertAdjacentHTML('afterbegin', headerTemplate());
+document.body.insertAdjacentHTML('beforeend', footerTemplate());

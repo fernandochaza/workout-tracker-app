@@ -1,0 +1,11 @@
+header {
+  background-color: var(--primary-color);
+  padding: 1rem 2rem;
+}
+
+header nav a {
+  color: #fff;
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
