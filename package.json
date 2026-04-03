@@ -17,5 +17,9 @@
     "globals": "^17.4.0",
     "prettier": "^3.8.1",
     "vite": "^8.0.1"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/poppins": "^5.2.7"
   }
 }
