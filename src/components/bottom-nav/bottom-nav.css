@@ -28,6 +28,7 @@
 .bottom-nav__item svg {
   width: 22px;
   height: 22px;
+  flex-shrink: 0;
 }
 
 .bottom-nav__item--active {
@@ -36,4 +37,10 @@
 
 .bottom-nav__item:hover {
   color: var(--primary-color);
+}
+
+@media (min-width: 1024px) {
+  .bottom-nav {
+    display: none;
+  }
 }

@@ -21,6 +21,10 @@
   /* spacing */
   --radius: 8px;
   --shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+
+  /* layout */
+  --sidebar-width: 220px;
+  --sidebar-collapsed-width: 80px;
 }
 
 * {
@@ -34,6 +38,17 @@ body {
   font-size: var(--font-base);
   color: var(--text-primary);
   background-color: var(--bg-color);
+}
+
+@media (min-width: 1024px) {
+  body {
+    padding-left: var(--sidebar-width);
+    transition: padding-left 0.25s ease;
+  }
+
+  body.sidebar--collapsed {
+    padding-left: var(--sidebar-collapsed-width);
+  }
 }
 
 h1,

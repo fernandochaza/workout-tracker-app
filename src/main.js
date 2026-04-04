@@ -7,9 +7,15 @@ import './style.css';
 
 import { headerTemplate } from './components/header/header.js';
 import { bottomNavTemplate } from './components/bottom-nav/bottom-nav.js';
+import { sidebarTemplate, initSidebar } from './components/sidebar/sidebar.js';
 import { initExerciseMeta } from './js/services/exerciseMetaService.js';
 
-document.body.insertAdjacentHTML('afterbegin', headerTemplate({ variant: 'home' }));
+document.body.insertAdjacentHTML(
+  'afterbegin',
+  headerTemplate({ variant: 'home' })
+);
 document.body.insertAdjacentHTML('beforeend', bottomNavTemplate('home'));
+document.body.insertAdjacentHTML('beforeend', sidebarTemplate('home'));
 
+initSidebar();
 initExerciseMeta();
