@@ -6,10 +6,10 @@ import '@fontsource/poppins/700.css';
 import './style.css';
 
 import { headerTemplate } from './components/header/header.js';
-import { footerTemplate } from './components/footer/footer.js';
+import { bottomNavTemplate } from './components/bottom-nav/bottom-nav.js';
 import { initExerciseMeta } from './js/services/exerciseMetaService.js';
 
-document.body.insertAdjacentHTML('afterbegin', headerTemplate());
-document.body.insertAdjacentHTML('beforeend', footerTemplate());
+document.body.insertAdjacentHTML('afterbegin', headerTemplate({ variant: 'home' }));
+document.body.insertAdjacentHTML('beforeend', bottomNavTemplate('home'));
 
 initExerciseMeta();

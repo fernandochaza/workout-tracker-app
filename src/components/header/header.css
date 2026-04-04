@@ -1,11 +1,34 @@
-header {
-  background-color: var(--primary-color);
-  padding: 1rem 2rem;
+.header {
+  padding: 0.5rem 1rem;
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-header nav a {
-  color: #fff;
-  font-family: var(--font-headline);
-  font-weight: 600;
-  font-size: 1.25rem;
+.header__logo img {
+  height: 3rem;
+  width: auto;
+  display: block;
+}
+
+.header__back {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  white-space: nowrap;
+}
+
+.header__back:hover {
+  opacity: 0.8;
+}
+
+.header--subpage .header__title {
+  font-size: 1rem;
 }
