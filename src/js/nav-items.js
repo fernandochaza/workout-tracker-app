@@ -3,7 +3,11 @@
  */
 export const NAV_ITEMS = [
   { label: 'Home', href: '/index.html', icon: homeIcon() },
-  { label: 'Exercises', href: '/exercises.html', icon: exercisesIcon() },
+  {
+    label: 'Exercises',
+    href: '/src/pages/browse-exercises/index.html',
+    icon: exercisesIcon(),
+  },
   { label: 'Routines', href: '/routines.html', icon: routinesIcon() },
   { label: 'Progress', href: '/progress.html', icon: progressIcon() },
 ];

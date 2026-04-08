@@ -6,6 +6,7 @@
   .sidebar {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     position: fixed;
     top: 0;
     left: 0;
@@ -20,9 +21,9 @@
 
   .sidebar__header {
     display: flex;
+    height: 80px;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
     margin-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
   }
@@ -58,7 +59,7 @@
   }
 
   .sidebar__logo img {
-    height: 2.5rem;
+    height: 40px;
     width: auto;
     display: block;
   }
@@ -78,7 +79,7 @@
     border-radius: var(--radius);
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 500;
     transition:
       background-color 0.25s ease,
@@ -107,7 +108,7 @@
   }
 
   /* Collapsed sidebar */
-  .sidebar--collapsed {
+  .sidebar.sidebar--collapsed {
     width: var(--sidebar-collapsed-width);
   }
 

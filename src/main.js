@@ -10,12 +10,30 @@ import { bottomNavTemplate } from './components/bottom-nav/bottom-nav.js';
 import { sidebarTemplate, initSidebar } from './components/sidebar/sidebar.js';
 import { initExerciseMeta } from './js/services/exerciseMetaService.js';
 
-document.body.insertAdjacentHTML(
-  'afterbegin',
-  headerTemplate({ variant: 'home' })
-);
-document.body.insertAdjacentHTML('beforeend', bottomNavTemplate('home'));
-document.body.insertAdjacentHTML('beforeend', sidebarTemplate('home'));
+const BROWSE_EXERCISES_PAGE = 'browse-exercises';
+
+const { activePage, headerOptions } = getPageState(window.location.pathname);
+
+document.body.insertAdjacentHTML('afterbegin', headerTemplate(headerOptions));
+document.body.insertAdjacentHTML('beforeend', bottomNavTemplate(activePage));
+document.body.insertAdjacentHTML('beforeend', sidebarTemplate(activePage));
 
 initSidebar();
 initExerciseMeta();
+
+function getPageState(pathname) {
+  if (pathname.includes(BROWSE_EXERCISES_PAGE)) {
+    return {
+      activePage: 'exercises',
+      headerOptions: {
+        variant: 'page',
+        title: 'Browse Exercises',
+      },
+    };
+  }
+
+  return {
+    activePage: 'home',
+    headerOptions: { variant: 'home' },
+  };
+}

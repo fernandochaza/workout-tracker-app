@@ -6,31 +6,42 @@ const headers = {
   'x-rapidapi-host': 'exercisedb.p.rapidapi.com',
 };
 
-export async function getAllExercises(limit = 20, offset = 0) {
-  const res = await fetch(
-    `${BASE_URL}/exercises?limit=${limit}&offset=${offset}`,
-    { headers, method: 'GET' }
-  );
-  if (!res.ok) throw new Error(`ExerciseDB error: ${res.status}`);
-  return res.json();
-}
-
-export async function getExerciseById(id) {
-  const res = await fetch(`${BASE_URL}/exercises/exercise/${id}`, {
+async function request(path, { query, responseType = 'json' } = {}) {
+  const queryString = query ? `?${new URLSearchParams(query).toString()}` : '';
+  const res = await fetch(`${BASE_URL}${path}${queryString}`, {
     headers,
     method: 'GET',
   });
+
   if (!res.ok) throw new Error(`ExerciseDB error: ${res.status}`);
+  if (responseType === 'blob') return res.blob();
   return res.json();
 }
 
+export async function getAllExercises(limit = 20, offset = 0) {
+  return request('/exercises', {
+    query: { limit: String(limit), offset: String(offset) },
+  });
+}
+
+export async function getExerciseById(id) {
+  return request(`/exercises/exercise/${id}`);
+}
+
+export async function getExerciseImage(exerciseId, resolution = '720') {
+  return request('/image', {
+    query: {
+      resolution: String(resolution),
+      exerciseId: String(exerciseId),
+    },
+    responseType: 'blob',
+  });
+}
+
 export async function getExercisesByBodyPart(bodyPart, limit = 20, offset = 0) {
-  const res = await fetch(
-    `${BASE_URL}/exercises/bodyPart/${encodeURIComponent(bodyPart)}?limit=${limit}&offset=${offset}`,
-    { headers, method: 'GET' }
-  );
-  if (!res.ok) throw new Error(`ExerciseDB error: ${res.status}`);
-  return res.json();
+  return request(`/exercises/bodyPart/${bodyPart}`, {
+    query: { limit: String(limit), offset: String(offset) },
+  });
 }
 
 export async function getExercisesByEquipment(
@@ -38,37 +49,31 @@ export async function getExercisesByEquipment(
   limit = 20,
   offset = 0
 ) {
-  const res = await fetch(
-    `${BASE_URL}/exercises/equipment/${encodeURIComponent(equipment)}?limit=${limit}&offset=${offset}`,
-    { headers, method: 'GET' }
-  );
-  if (!res.ok) throw new Error(`ExerciseDB error: ${res.status}`);
-  return res.json();
+  return request(`/exercises/equipment/${equipment}`, {
+    query: { limit: String(limit), offset: String(offset) },
+  });
 }
 
 export async function getExercisesByMuscle(muscle, limit = 20, offset = 0) {
-  const res = await fetch(
-    `${BASE_URL}/exercises/target/${encodeURIComponent(muscle)}?limit=${limit}&offset=${offset}`,
-    { headers }
-  );
-  if (!res.ok) throw new Error(`ExerciseDB error: ${res.status}`);
-  return res.json();
+  return request(`/exercises/target/${muscle}`, {
+    query: { limit: String(limit), offset: String(offset) },
+  });
+}
+
+export async function getExercisesByName(name, limit = 20, offset = 0) {
+  return request(`/exercises/name/${name}`, {
+    query: { limit: String(limit), offset: String(offset) },
+  });
 }
 
 export async function getBodyPartList() {
-  const res = await fetch(`${BASE_URL}/exercises/bodyPartList`, { headers });
-  if (!res.ok) throw new Error(`ExerciseDB error: ${res.status}`);
-  return res.json();
+  return request('/exercises/bodyPartList');
 }
 
 export async function getEquipmentList() {
-  const res = await fetch(`${BASE_URL}/exercises/equipmentList`, { headers });
-  if (!res.ok) throw new Error(`ExerciseDB error: ${res.status}`);
-  return res.json();
+  return request('/exercises/equipmentList');
 }
 
 export async function getTargetList() {
-  const res = await fetch(`${BASE_URL}/exercises/targetList`, { headers });
-  if (!res.ok) throw new Error(`ExerciseDB error: ${res.status}`);
-  return res.json();
+  return request('/exercises/targetList');
 }

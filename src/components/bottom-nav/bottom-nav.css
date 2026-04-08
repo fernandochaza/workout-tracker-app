@@ -33,6 +33,7 @@
 
 .bottom-nav__item--active {
   color: var(--primary-color);
+  background-color: var(--bg-color);
 }
 
 .bottom-nav__item:hover {

@@ -1,3 +1,13 @@
+@import '@picocss/pico';
+
+/* Override Pico dialog defaults */
+dialog {
+  width: min(90vw, 600px);
+  min-width: auto;
+  max-width: none;
+  margin: auto;
+}
+
 :root {
   /* fonts */
   --font-body: 'Inter', Arial, sans-serif;
@@ -10,11 +20,11 @@
   --bg-color: #f4f5f7;
   --surface-color: #ffffff;
   --text-primary: #1a1a2e;
-  --text-secondary: #6b7280;
+  --text-secondary: #4b5563;
   --border-color: #d1d5db;
 
   /* sizes */
-  --font-base: 16px;
+  --font-base: 14px;
   --small-font: 0.875em;
   --large-font: 1.125em;
 
@@ -38,6 +48,13 @@ body {
   font-size: var(--font-base);
   color: var(--text-primary);
   background-color: var(--bg-color);
+  min-height: 100vh;
+  width: 100%;
+}
+
+body header {
+  margin: 0;
+  padding: 0;
 }
 
 @media (min-width: 1024px) {
@@ -56,4 +73,22 @@ h2,
 h3 {
   font-family: var(--font-headline);
   color: var(--primary-color);
+  margin: 0;
+}
+
+select {
+  font-size: 0.9rem;
+}
+
+/* Utility class to hide content visually while keeping it available to screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
