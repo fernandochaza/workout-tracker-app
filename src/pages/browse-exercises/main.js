@@ -233,9 +233,7 @@ function attachDetailsButtons(exercises) {
 
 function showExerciseDetails(exercise) {
   const secondaryMuscles = exercise.secondaryMuscles?.length
-    ? exercise.secondaryMuscles
-        .map((m) => capitalizeWords(m))
-        .join(', ')
+    ? exercise.secondaryMuscles.map((m) => capitalizeWords(m)).join(', ')
     : 'None';
 
   const instructions = exercise.instructions?.length
@@ -259,12 +257,16 @@ function showExerciseDetails(exercise) {
       </dl>
     </section>
 
-    ${exercise.description ? `
+    ${
+      exercise.description
+        ? `
       <section class="details-section">
         <h3>Description</h3>
         <p>${exercise.description}</p>
       </section>
-    ` : ''}
+    `
+        : ''
+    }
 
     <section class="details-section">
       <h3>Instructions</h3>
