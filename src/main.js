@@ -12,6 +12,8 @@ import { initExerciseMeta } from './js/services/exerciseMetaService.js';
 
 const BROWSE_EXERCISES_PAGE = 'browse-exercises';
 
+document.documentElement.setAttribute('data-theme', 'light');
+
 const { activePage, headerOptions } = getPageState(window.location.pathname);
 
 document.body.insertAdjacentHTML('afterbegin', headerTemplate(headerOptions));
