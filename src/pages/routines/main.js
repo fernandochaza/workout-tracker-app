@@ -1,5 +1,9 @@
 import './main.css';
-import { getAllRoutines, saveRoutine } from '../../js/modules/routineModule.js';
+import {
+  getAllRoutines,
+  getRoutineById,
+  saveRoutine,
+} from '../../js/modules/routineModule.js';
 import {
   getSessionsByRoutineId,
   saveSession,
@@ -9,6 +13,8 @@ import { DAY_NAMES } from '../../js/entities/session.js';
 import { DetailsDialog } from '../../components/details-dialog/details-dialog.js';
 
 // DOM Elements
+const listView = document.querySelector('#routines-list-view');
+const detailView = document.querySelector('#routine-detail-view');
 const activeRoutinesList = document.querySelector('#active-routines-list');
 const inactiveRoutinesList = document.querySelector('#inactive-routines-list');
 const activeSection = document.querySelector('#active-section');
@@ -73,13 +79,18 @@ function renderRoutines() {
 
 function createRoutineCard(routine) {
   const card = document.createElement('div');
-  card.className = 'routine-card';
+  card.className = 'routine-card routine-card--clickable';
 
   const sessions = getSessionsByRoutineId(routine.id);
-  const sessionsList = sessions
-    .slice(0, 3)
-    .map((s) => `<span>${s.name}</span>`)
-    .join('');
+  const count = sessions.length;
+  const days = sessions
+    .filter((s) => s.dayOfWeek !== null)
+    .map((s) => DAY_NAMES[s.dayOfWeek].slice(0, 3)) // 3 letters from day
+    .join(', ');
+
+  const summary = count
+    ? `${count} session${count !== 1 ? 's' : ''}${days ? ' · ' + days : ''}`
+    : 'No sessions';
 
   card.innerHTML = `
     <div class="routine-card-header">
@@ -87,13 +98,81 @@ function createRoutineCard(routine) {
       <span class="routine-status">${routine.status}</span>
     </div>
     <p class="routine-description">${routine.description || 'No description'}</p>
-    <div class="routine-sessions">
-      <strong>Sessions:</strong>
-      <div class="sessions-preview">${sessionsList || '<span>No sessions</span>'}</div>
-    </div>
+    <p class="routine-summary">${summary}</p>
   `;
 
+  card.addEventListener('click', () => showRoutineDetail(routine.id));
+
   return card;
+}
+
+// --- Detail View ---
+
+function showRoutineDetail(routineId) {
+  const routine = getRoutineById(routineId);
+  if (!routine) return;
+
+  const sessions = getSessionsByRoutineId(routineId);
+
+  const sessionsHTML = sessions.length
+    ? sessions
+        .map((session) => {
+          const dayLabel =
+            session.dayOfWeek !== null
+              ? DAY_NAMES[session.dayOfWeek]
+              : 'No day';
+          const exerciseCount = session.exercises.length;
+          const exerciseList = session.exercises.length
+            ? session.exercises
+                .map(
+                  (ex) =>
+                    `<li>
+                      <span class="session-exercise__name">${capitalizeWords(ex.name)}</span>
+                      <span class="session-exercise__detail">${ex.plannedSets} × ${ex.plannedReps}</span>
+                    </li>`
+                )
+                .join('')
+            : '<li class="session-exercise--empty">No exercises added yet</li>';
+
+          return `
+            <div class="session-card">
+              <div class="session-card__header">
+                <h3>${capitalizeWords(session.name)}</h3>
+                <span class="session-card__day">${dayLabel}</span>
+              </div>
+              <p class="session-card__summary">${exerciseCount} exercise${exerciseCount !== 1 ? 's' : ''}</p>
+              <ul class="session-card__exercises">${exerciseList}</ul>
+            </div>`;
+        })
+        .join('')
+    : '<p class="empty-state">No sessions in this routine.</p>';
+
+  detailView.innerHTML = `
+    <button id="btn-back-to-list" class="btn-back">← Back to Routines</button>
+    <div class="routine-detail__header">
+      <div>
+        <h2>${capitalizeWords(routine.name)}</h2>
+        <p class="routine-detail__description">${routine.description || 'No description'}</p>
+      </div>
+      <span class="routine-status">${routine.status}</span>
+    </div>
+    <section class="routine-detail__sessions">
+      <h3>Sessions</h3>
+      <div class="sessions-grid">${sessionsHTML}</div>
+    </section>
+  `;
+
+  detailView
+    .querySelector('#btn-back-to-list')
+    .addEventListener('click', showListView);
+
+  listView.style.display = 'none';
+  detailView.style.display = 'block';
+}
+
+function showListView() {
+  detailView.style.display = 'none';
+  listView.style.display = 'block';
 }
 
 function renderScreen1HTML() {

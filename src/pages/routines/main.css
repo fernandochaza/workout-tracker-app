@@ -26,7 +26,7 @@
   font-weight: 600;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
 .routines-grid {
@@ -63,7 +63,7 @@
   background-color: var(--bg-color);
   color: var(--text-secondary);
   border-radius: 999px;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
   white-space: nowrap;
@@ -72,31 +72,12 @@
 .routine-description {
   margin: 0;
   color: var(--text-secondary);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
 }
 
-.routine-sessions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.routine-sessions strong {
-  color: var(--text-secondary);
-}
-
-.sessions-preview {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
-.sessions-preview span {
-  display: inline-block;
-  padding: 0.2rem 0.45rem;
-  background-color: var(--bg-color);
-  border-radius: 999px;
-  font-size: 0.76rem;
+.routine-summary {
+  margin: 0;
+  font-size: 0.8rem;
   color: var(--text-secondary);
 }
 
@@ -148,7 +129,7 @@
   cursor: pointer;
   padding: 0.4rem;
   border-radius: var(--radius);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   transition: background-color 0.15s;
 }
 
@@ -202,4 +183,132 @@
 
 .modal-actions button {
   padding: 0.4rem 1rem;
+}
+
+/* Clickable routine card */
+.routine-card--clickable {
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.routine-card--clickable:hover {
+  border-color: var(--primary-color);
+}
+
+/* Back button */
+.btn-back {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-back:hover {
+  opacity: 0.8;
+}
+
+/* Routine detail header */
+.routine-detail__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.routine-detail__header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.routine-detail__description {
+  margin: 0.25rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Sessions grid in detail view */
+.routine-detail__sessions h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sessions-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Session card */
+.session-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  background-color: var(--bg-color);
+}
+
+.session-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.session-card__header h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.session-card__day {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background-color: var(--surface-color);
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
+}
+
+.session-card__summary {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.session-card__exercises {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.session-card__exercises li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.session-exercise__name {
+  color: var(--text-primary);
+}
+
+.session-exercise__detail {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.session-exercise--empty {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 0.8rem;
 }

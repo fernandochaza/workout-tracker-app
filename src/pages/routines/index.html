@@ -12,28 +12,34 @@
 
   <body>
     <main class="page-card">
-      <div class="routines-header">
-        <h2>Routines</h2>
-        <button id="btn-new-routine" class="btn-primary">+ New Routine</button>
+      <div id="routines-list-view">
+        <section class="routines-header">
+          <h2>Routines</h2>
+          <button id="btn-new-routine" class="btn-primary">
+            + New Routine
+          </button>
+        </section>
+
+        <section id="active-section" class="routine-section">
+          <h2>Active Routines</h2>
+          <div id="active-routines-list" class="routines-grid"></div>
+        </section>
+
+        <section
+          id="inactive-section"
+          class="routine-section"
+          style="display: none"
+        >
+          <h2>Inactive Routines</h2>
+          <div id="inactive-routines-list" class="routines-grid"></div>
+        </section>
+
+        <div id="empty-state" class="empty-state" style="display: none">
+          <p>No routines yet. Create your first one!</p>
+        </div>
       </div>
 
-      <section id="active-section" class="routine-section">
-        <h2>Active Routines</h2>
-        <div id="active-routines-list" class="routines-grid"></div>
-      </section>
-
-      <section
-        id="inactive-section"
-        class="routine-section"
-        style="display: none"
-      >
-        <h2>Inactive Routines</h2>
-        <div id="inactive-routines-list" class="routines-grid"></div>
-      </section>
-
-      <div id="empty-state" class="empty-state" style="display: none">
-        <p>No routines yet. Create your first one!</p>
-      </div>
+      <div id="routine-detail-view" style="display: none"></div>
     </main>
   </body>
 

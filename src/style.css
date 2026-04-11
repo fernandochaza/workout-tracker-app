@@ -30,8 +30,8 @@ dialog {
 
   /* sizes */
   --font-base: 14px;
-  --small-font: 0.875em;
-  --large-font: 1.125em;
+  --small-font: 0.85em;
+  --large-font: 1.15em;
 
   /* spacing */
   --radius: 8px;
