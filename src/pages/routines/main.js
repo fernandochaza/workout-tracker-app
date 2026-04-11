@@ -197,8 +197,8 @@ function renderScreen1HTML() {
       <div class="day-selector">${dayCheckboxes}</div>
     </div>
     <div class="modal-actions">
-      <button type="button" id="btn-cancel-1" class="btn-secondary">Cancel</button>
-      <button type="button" id="btn-next" class="btn-primary">Next</button>
+      <button type="button" id="btn-cancel-1" class="secondary">Cancel</button>
+      <button type="button" id="btn-next">Next</button>
     </div>
   `;
 }
@@ -241,8 +241,8 @@ function renderScreen2HTML() {
     <p class="template-subtitle">Pick a template or build from scratch</p>
     <div class="template-grid">${cards}</div>
     <div class="modal-actions">
-      <button type="button" id="btn-back" class="btn-secondary">Back</button>
-      <button type="button" id="btn-create" class="btn-primary">Create Routine</button>
+      <button type="button" id="btn-back" class="secondary">Back</button>
+      <button type="button" id="btn-create">Create Routine</button>
     </div>
   `;
 }

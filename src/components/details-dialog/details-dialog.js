@@ -13,13 +13,13 @@ export class DetailsDialog {
       this.dialog.className = 'details-dialog';
 
       this.dialog.innerHTML = `
-        <div class="details-dialog__content">
-          <div class="details-dialog__header">
+        <article>
+          <header class="details-dialog__header">
+            <button aria-label="Close" rel="prev" class="details-dialog__close"></button>
             <h2 class="details-dialog__title"></h2>
-            <button class="details-dialog__close" aria-label="Close details">×</button>
-          </div>
+          </header>
           <div class="details-dialog__body"></div>
-        </div>
+        </article>
       `;
 
       document.body.appendChild(this.dialog);

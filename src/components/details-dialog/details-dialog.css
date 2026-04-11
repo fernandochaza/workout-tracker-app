@@ -1,32 +1,13 @@
-/* Details Dialog Styles */
+/* Details Dialog */
 dialog.details-dialog {
   padding: 0;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  background-color: var(--surface-color);
-  max-height: 640px;
-  min-height: auto;
-  align-items: baseline;
+  background: none;
+  min-width: 100%;
 }
 
-.details-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.45);
-}
-
-.details-dialog__content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 1rem;
-}
-
-.details-dialog__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid var(--border-color);
+dialog.details-dialog article {
+  margin: 0;
+  max-height: 75vh;
 }
 
 .details-dialog__title {
@@ -35,35 +16,12 @@ dialog.details-dialog {
   color: var(--primary-color);
 }
 
-.details-dialog__close {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: var(--text-secondary);
-  font-size: 1.25rem;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius);
-  transition:
-    color 0.15s,
-    background-color 0.15s;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.details-dialog__close:hover {
-  color: var(--text-primary);
-  background-color: var(--bg-color);
-}
-
 .details-dialog__body {
-  padding: 1rem;
   overflow-y: auto;
-  max-height: calc(90vh - 56px);
+}
+
+.details-dialog__header {
+  padding: 1rem;
 }
 
 .details-section {
@@ -87,31 +45,14 @@ dialog.details-dialog {
   display: grid;
   grid-template-columns: max-content 1fr;
   gap: 0.5rem 1rem;
-  margin: 0;
 }
 
-.details-section dt {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.details-section dd {
-  margin: 0;
+.details-section p {
   color: var(--text-secondary);
-}
-
-.details-section ol {
-  margin: 0;
-  padding-left: 1.5rem;
+  line-height: 1.5;
 }
 
 .details-section li {
   margin-bottom: 0.5rem;
   color: var(--text-secondary);
-}
-
-.details-section p {
-  margin: 0;
-  color: var(--text-secondary);
-  line-height: 1.5;
 }

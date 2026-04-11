@@ -11,20 +11,22 @@
   </head>
 
   <body>
-    <form id="search-form" class="search-form page-card">
-      <div class="search-form__controls">
-        <label for="search-input" class="sr-only">Search exercises</label>
-        <input
-          id="search-input"
-          name="search-input"
-          type="text"
-          class="search-form__input"
-          placeholder="Search exercises..."
-        />
-        <button id="search-button" type="button" class="search-form__button btn-primary">
-          Search
-        </button>
-      </div>
+    <article id="search-form" class="search-form page-card">
+      <form>
+        <div class="search-form__controls">
+          <label for="search-input" class="sr-only">Search exercises</label>
+          <input
+            id="search-input"
+            name="search-input"
+            type="text"
+            class="search-form__input"
+            placeholder="Search exercises..."
+          />
+          <button id="search-button" type="button" class="search-form__button">
+            Search
+          </button>
+        </div>
+      </form>
 
       <section class="search-form__filters" aria-labelledby="filters-title">
         <h2 id="filters-title" class="search-form__filters-title">Filters</h2>
@@ -81,7 +83,7 @@
         </p>
         <ul id="results-list" class="results-list"></ul>
       </section>
-    </form>
+    </article>
   </body>
 
   <script type="module" src="/src/main.js"></script>

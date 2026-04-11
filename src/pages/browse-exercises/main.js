@@ -16,7 +16,7 @@ import {
 } from '../../js/api/ExerciseAPI.js';
 import { capitalizeWords } from '../../js/utils/string.js';
 
-const searchForm = document.querySelector('#search-form');
+const searchForm = document.querySelector('#search-form form');
 const searchInput = document.querySelector('#search-input');
 const searchButton = document.querySelector('#search-button');
 const bodyPartSelect = document.querySelector('#filter-body-part');

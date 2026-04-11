@@ -43,13 +43,6 @@ input.search-form__input {
   margin-top: 0.75rem;
 }
 
-.search-form__label {
-  display: block;
-  margin-bottom: 0.25rem;
-  color: var(--text-primary);
-  font-weight: 500;
-}
-
 .search-form__results {
   margin-top: 1rem;
   padding-top: 1rem;
@@ -153,14 +146,4 @@ input.search-form__input {
   margin-left: auto;
   padding: 0.4rem 0.75rem;
   font-size: 0.8rem;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.results-list__details-btn:hover {
-  background-color: var(--accent-color);
 }
