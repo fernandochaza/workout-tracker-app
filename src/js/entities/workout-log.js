@@ -1,6 +1,6 @@
 import { createId } from '../utils/id.js';
 
-function createCompletedSet(set = {}, index = 0) {
+function createLogSet(set = {}, index = 0) {
   return {
     setNumber: set.setNumber || index + 1,
     reps: set.reps || 0,
@@ -10,23 +10,24 @@ function createCompletedSet(set = {}, index = 0) {
   };
 }
 
-function createCompletedExercise(exercise = {}) {
+function createLogExercise(exercise = {}) {
   return {
     exerciseId: exercise.exerciseId || '',
+    // Snapshot from current exercise status to prevent errors when deleting an exercise
     exerciseSource: exercise.exerciseSource || 'api',
     name: exercise.name || '',
     bodyPart: exercise.bodyPart || '',
     target: exercise.target || '',
     equipment: exercise.equipment || '',
     sets: Array.isArray(exercise.sets)
-      ? exercise.sets.map((set, index) => createCompletedSet(set, index))
+      ? exercise.sets.map((set, index) => createLogSet(set, index))
       : [],
     notes: exercise.notes || '',
     skipped: Boolean(exercise.skipped),
   };
 }
 
-export function createCompletedSession(input = {}) {
+export function createWorkoutLog(input = {}) {
   return {
     id: input.id || createId(),
     sessionId: input.sessionId || '',
@@ -35,7 +36,7 @@ export function createCompletedSession(input = {}) {
     completedAt: input.completedAt || Date.now(),
     durationSeconds: input.durationSeconds || 0,
     exercises: Array.isArray(input.exercises)
-      ? input.exercises.map((exercise) => createCompletedExercise(exercise))
+      ? input.exercises.map((exercise) => createLogExercise(exercise))
       : [],
     notes: input.notes || '',
   };
