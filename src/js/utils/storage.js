@@ -10,5 +10,5 @@ export const STORAGE_KEYS = {
   COLLECTION_ROUTINES: 'app_routines',
   COLLECTION_SESSIONS: 'app_sessions',
   COLLECTION_COMPLETED_SESSIONS: 'app_completed_sessions',
-  COLLECTION_CUSTOM_EXERCISES: 'app_custom_exercises',
+  COLLECTION_EXERCISES: 'app_exercises',
 };
