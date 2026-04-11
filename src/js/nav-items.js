@@ -8,7 +8,11 @@ export const NAV_ITEMS = [
     href: '/src/pages/exercises/index.html',
     icon: exercisesIcon(),
   },
-  { label: 'Routines', href: '/src/pages/routines/index.html', icon: routinesIcon() },
+  {
+    label: 'Routines',
+    href: '/src/pages/routines/index.html',
+    icon: routinesIcon(),
+  },
   { label: 'Progress', href: '/progress.html', icon: progressIcon() },
 ];
 

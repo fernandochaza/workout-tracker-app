@@ -1,4 +1,8 @@
-import { getLocalStorage, setLocalStorage, STORAGE_KEYS } from '../utils/storage.js';
+import {
+  getLocalStorage,
+  setLocalStorage,
+  STORAGE_KEYS,
+} from '../utils/storage.js';
 import { createRoutine } from '../entities/routine.js';
 
 function getRoutinesCollection() {

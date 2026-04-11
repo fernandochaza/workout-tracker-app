@@ -24,7 +24,6 @@ import {
 } from '../../js/modules/exerciseModule.js';
 import { capitalizeWords } from '../../js/utils/string.js';
 
-
 // --- DOM: Tabs ---
 const tabs = document.querySelectorAll('[role="tab"]');
 const panels = document.querySelectorAll('[role="tabpanel"]');
@@ -241,9 +240,7 @@ function attachSaveButtons(exercises) {
       const exercise = exercises.find((ex) => ex.id === btn.dataset.exerciseId);
       if (exercise) {
         saveFromApi(exercise);
-        btn
-          .closest('.exercise-card')
-          .classList.add('exercise-card--saved');
+        btn.closest('.exercise-card').classList.add('exercise-card--saved');
         btn.outerHTML =
           '<span class="exercise-card__saved-badge">✓ In library</span>';
         renderLibrary();

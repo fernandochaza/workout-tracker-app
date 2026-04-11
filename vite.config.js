@@ -5,7 +5,7 @@ export default defineConfig({
     rolldownOptions: {
       input: {
         home: 'index.html',
-        'exercises': 'src/pages/exercises/index.html',
+        exercises: 'src/pages/exercises/index.html',
         routines: 'src/pages/routines/index.html',
       },
     },
