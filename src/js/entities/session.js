@@ -24,6 +24,8 @@ export const DAY_OF_WEEK = {
   SUNDAY: 6,
 };
 
+export const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
 export function createSession(input = {}) {
   return {
     id: input.id || createId(),

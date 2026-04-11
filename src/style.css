@@ -1,5 +1,10 @@
 @import '@picocss/pico';
 
+/* Scale all Pico rem-based sizing down globally */
+html {
+  font-size: 16px;
+}
+
 /* Override Pico dialog defaults */
 dialog {
   width: min(90vw, 600px);
@@ -74,6 +79,48 @@ h3 {
   font-family: var(--font-headline);
   color: var(--primary-color);
   margin: 0;
+}
+
+/* Shared page card container */
+.page-card {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--surface-color);
+}
+
+@media (min-width: 640px) {
+  .page-card {
+    max-width: 900px;
+    margin: 1.25rem auto;
+  }
+}
+
+/* Global button utilities */
+.btn-primary,
+.btn-secondary {
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  transition: opacity 0.15s;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  opacity: 0.8;
+}
+
+.btn-secondary {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
 }
 
 select {

@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="./main.css" />
 
-    <title>Browse Exercises</title>
+    <title>Exercises - Workout Tracker</title>
   </head>
 
   <body>
-    <form id="search-form" class="search-form">
+    <form id="search-form" class="search-form page-card">
       <div class="search-form__controls">
         <label for="search-input" class="sr-only">Search exercises</label>
         <input
@@ -19,7 +21,7 @@
           class="search-form__input"
           placeholder="Search exercises..."
         />
-        <button id="search-button" type="button" class="search-form__button">
+        <button id="search-button" type="button" class="search-form__button btn-primary">
           Search
         </button>
       </div>

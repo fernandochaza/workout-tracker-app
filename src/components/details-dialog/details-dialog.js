@@ -1,3 +1,5 @@
+import './details-dialog.css';
+
 export class DetailsDialog {
   constructor() {
     this.dialog = null;

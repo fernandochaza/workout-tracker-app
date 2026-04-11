@@ -6,6 +6,7 @@ export default defineConfig({
       input: {
         home: 'index.html',
         'browse-exercises': 'src/pages/browse-exercises/index.html',
+        routines: 'src/pages/routines/index.html',
       },
     },
   },

@@ -1,13 +1,3 @@
-@import '../../components/details-dialog/details-dialog.css';
-
-.search-form {
-  margin: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  background-color: var(--surface-color);
-}
-
 div.search-form__controls {
   display: flex;
   align-items: flex-start;
@@ -17,7 +7,6 @@ div.search-form__controls {
 input.search-form__input {
   flex: 1;
   min-width: 0;
-  height: 48px;
   font-size: 0.9rem;
 }
 
@@ -29,15 +18,12 @@ input.search-form__input {
 }
 
 .search-form__button {
-  min-width: 110px;
-  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .search-form__select {
-  height: 48px;
   padding: 0.5rem 0.75rem;
 }
 

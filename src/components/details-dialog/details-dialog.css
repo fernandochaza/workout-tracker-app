@@ -1,57 +1,69 @@
 /* Details Dialog Styles */
-.details-dialog {
+dialog.details-dialog {
+  padding: 0;
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
+  background-color: var(--surface-color);
+  max-height: 640px;
+  min-height: auto;
+  align-items: baseline;
 }
 
 .details-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.45);
 }
 
 .details-dialog__content {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  width: 100%;
+  padding: 1rem;
 }
 
 .details-dialog__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 0.875rem 1rem;
   border-bottom: 1px solid var(--border-color);
 }
 
 .details-dialog__title {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--primary-color);
 }
 
 .details-dialog__close {
   background: none;
   border: none;
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  cursor: pointer;
   padding: 0;
-  width: 32px;
-  height: 32px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.25s ease;
+  border-radius: var(--radius);
+  transition:
+    color 0.15s,
+    background-color 0.15s;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .details-dialog__close:hover {
   color: var(--text-primary);
+  background-color: var(--bg-color);
 }
 
 .details-dialog__body {
   padding: 1rem;
   overflow-y: auto;
-  max-height: calc(100vh - 100px);
+  max-height: calc(90vh - 56px);
 }
 
 .details-section {
