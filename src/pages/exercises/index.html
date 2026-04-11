@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="./main.css" />
+
+    <title>Exercises - Workout Tracker</title>
+  </head>
+
+  <body>
+    <article class="page-card exercises-page">
+      <h2 class="exercises-page__title">Exercises</h2>
+
+      <div class="tabs" role="tablist">
+        <button
+          role="tab"
+          aria-selected="true"
+          aria-controls="panel-library"
+          id="tab-my-library"
+        >
+          My Library
+        </button>
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-discover"
+          id="tab-discover"
+        >
+          Discover
+        </button>
+      </div>
+
+      <!-- My Library Tab -->
+      <section role="tabpanel" id="panel-library" aria-labelledby="tab-my-library">
+        <div class="library-search">
+          <input
+            id="library-search"
+            type="text"
+            placeholder="Enter exercise name..."
+          />
+          <button id="btn-add-custom" class="outline">+ Custom</button>
+        </div>
+        <p id="library-status" class="library-status" role="status"></p>
+        <ul id="library-list" class="exercise-card-list"></ul>
+      </section>
+
+      <!-- Discover Tab -->
+      <section
+        role="tabpanel"
+        id="panel-discover"
+        aria-labelledby="tab-discover"
+        hidden
+      >
+        <form role="search">
+          <input
+            id="search-input"
+            name="search-input"
+            type="search"
+            placeholder="Search exercises..."
+            aria-label="Search exercises"
+          />
+          <input id="search-button" type="button" value="Search" />
+        </form>
+
+        <section class="search-form__filters" aria-labelledby="filters-title">
+          <h2 id="filters-title" class="search-form__filters-title">Filters</h2>
+
+          <div class="search-form__field">
+            <label for="filter-body-part">Body Part</label>
+            <select
+              id="filter-body-part"
+              name="bodyPart"
+              class="search-form__select"
+            >
+              <option value="">All</option>
+            </select>
+          </div>
+
+          <div class="search-form__field">
+            <label for="filter-target-muscle">Target Muscle</label>
+            <select
+              id="filter-target-muscle"
+              name="target"
+              class="search-form__select"
+            >
+              <option value="">All</option>
+            </select>
+          </div>
+
+          <div class="search-form__field">
+            <label for="filter-equipment">Equipment</label>
+            <select
+              id="filter-equipment"
+              name="equipment"
+              class="search-form__select"
+            >
+              <option value="">All</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="search-form__results" aria-labelledby="results-title">
+          <h2 id="results-title" class="search-form__filters-title">Results</h2>
+          <p
+            id="results-status"
+            class="search-form__results-status"
+            role="status"
+          >
+            Use Search to run text queries. Filter changes auto-apply when query
+            is empty.
+          </p>
+          <ul id="results-list" class="exercise-card-list"></ul>
+        </section>
+      </section>
+    </article>
+  </body>
+
+  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="main.js"></script>
+</html>

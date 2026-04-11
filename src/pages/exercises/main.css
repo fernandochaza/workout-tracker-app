@@ -1,0 +1,123 @@
+/* Page title */
+.exercises-page__title {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  background: none;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.tabs button[aria-selected='true'] {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  font-weight: 600;
+}
+
+.tabs button:hover {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.tabs button:focus,
+.tabs button:active {
+  box-shadow: none;
+  --pico-border-color: transparent;
+}
+
+/* My Library */
+.library-search {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.library-search {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.library-search button {
+  white-space: nowrap;
+}
+
+.library-status {
+  margin: 0.5rem 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.library-delete-btn {
+  color: var(--text-secondary);
+  border-color: var(--text-secondary);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+/* Discover search form */
+.search-form__select {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.search-form__select {
+  padding: 0.5rem 0.75rem;
+}
+
+.search-form__filters {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.search-form__filters-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.search-form__field {
+  margin-top: 0.75rem;
+}
+
+.search-form__results {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.search-form__results-status {
+  margin: 0.5rem 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+@media (min-width: 640px) {
+  .search-form {
+    margin: 1.25rem auto;
+    max-width: 900px;
+  }
+}

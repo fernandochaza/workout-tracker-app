@@ -1,0 +1,121 @@
+/* Container */
+.exercise-card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+/* Card */
+.exercise-card {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--surface-color);
+}
+
+.exercise-card--saved {
+  border-left: 3px solid var(--accent-color);
+}
+
+.exercise-card__image--placeholder {
+  width: 70px;
+  height: 70px;
+  border: 1px solid var(--border-color);
+  border-radius: calc(var(--radius) - 2px);
+  background-color: var(--bg-color);
+}
+
+.exercise-card__content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.exercise-card__info {
+  min-width: 0;
+}
+
+.exercise-card__title {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.exercise-card__meta {
+  margin: 0.35rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.exercise-card__meta span {
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  background-color: var(--bg-color);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.exercise-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.exercise-card__source-badge {
+  margin-left: 8px;
+  padding: 0.15rem 0.4rem;
+  border-radius: 25%;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.exercise-card__source-badge--api {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.exercise-card__source-badge--custom {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.exercise-card__details-btn {
+  margin-top: 0rem;
+  margin-left: auto;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.exercise-card__save-btn {
+  margin-left: auto;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.exercise-card__saved-badge {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  cursor: default;
+  padding: 0.4rem 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .exercise-card {
+    grid-template-columns: 120px 1fr;
+  }
+
+  .exercise-card__image--placeholder {
+    width: 120px;
+    height: 120px;
+  }
+}

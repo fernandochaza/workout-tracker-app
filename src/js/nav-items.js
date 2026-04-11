@@ -5,7 +5,7 @@ export const NAV_ITEMS = [
   { label: 'Home', href: '/index.html', icon: homeIcon() },
   {
     label: 'Exercises',
-    href: '/src/pages/browse-exercises/index.html',
+    href: '/src/pages/exercises/index.html',
     icon: exercisesIcon(),
   },
   { label: 'Routines', href: '/src/pages/routines/index.html', icon: routinesIcon() },

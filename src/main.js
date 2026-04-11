@@ -10,7 +10,7 @@ import { bottomNavTemplate } from './components/bottom-nav/bottom-nav.js';
 import { sidebarTemplate, initSidebar } from './components/sidebar/sidebar.js';
 import { initExerciseMeta } from './js/services/exerciseMetaService.js';
 
-const BROWSE_EXERCISES_PAGE = 'browse-exercises';
+const BROWSE_EXERCISES_PAGE = 'exercises';
 const ROUTINES_PAGE = 'routines';
 
 document.documentElement.setAttribute('data-theme', 'light');

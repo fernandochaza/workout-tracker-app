@@ -1,5 +1,6 @@
 import './main.css';
 import { DetailsDialog } from '../../components/details-dialog/details-dialog.js';
+import { renderExerciseCard } from '../../components/exercise-card/exercise-card.js';
 import {
   getBodyParts,
   getEquipment,
@@ -7,16 +8,34 @@ import {
   initExerciseMeta,
 } from '../../js/services/exerciseMetaService.js';
 import {
-  getAllExercises,
+  getAllExercises as apiGetAllExercises,
   getExerciseImage,
   getExercisesByBodyPart,
   getExercisesByEquipment,
   getExercisesByName,
   getExercisesByMuscle,
 } from '../../js/api/ExerciseAPI.js';
+import {
+  getAllExercises as getLibraryExercises,
+  saveFromApi,
+  deleteExercise,
+  exerciseExists,
+  searchExercises as searchLibrary,
+} from '../../js/modules/exerciseModule.js';
 import { capitalizeWords } from '../../js/utils/string.js';
 
-const searchForm = document.querySelector('#search-form form');
+
+// --- DOM: Tabs ---
+const tabs = document.querySelectorAll('[role="tab"]');
+const panels = document.querySelectorAll('[role="tabpanel"]');
+
+// --- DOM: My Library ---
+const librarySearch = document.querySelector('#library-search');
+const libraryList = document.querySelector('#library-list');
+const libraryStatus = document.querySelector('#library-status');
+
+// --- DOM: Discover ---
+const searchForm = document.querySelector('#panel-discover form');
 const searchInput = document.querySelector('#search-input');
 const searchButton = document.querySelector('#search-button');
 const bodyPartSelect = document.querySelector('#filter-body-part');
@@ -26,9 +45,69 @@ const resultsList = document.querySelector('#results-list');
 const resultsStatus = document.querySelector('#results-status');
 
 const PAGE_SIZE = 10;
-
-// Initialize details dialog
 const detailsDialog = new DetailsDialog();
+
+tabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    tabs.forEach((t) => t.setAttribute('aria-selected', 'false'));
+    tab.setAttribute('aria-selected', 'true');
+
+    panels.forEach((p) => (p.hidden = true));
+    const target = document.querySelector(
+      `#${tab.getAttribute('aria-controls')}`
+    );
+    if (target) target.hidden = false;
+
+    if (tab.id === 'tab-library') renderLibrary();
+  });
+});
+
+librarySearch?.addEventListener('input', () => renderLibrary());
+
+function renderLibrary() {
+  const query = librarySearch?.value.trim() || '';
+  const exercises = query ? searchLibrary(query) : getLibraryExercises();
+
+  if (!exercises.length) {
+    libraryList.innerHTML = '';
+    libraryStatus.textContent = query
+      ? 'No exercises match your filter.'
+      : 'Your library is empty. Discover exercises or create a custom one!';
+    return;
+  }
+
+  libraryStatus.textContent = `${exercises.length} exercise${exercises.length !== 1 ? 's' : ''}`;
+
+  libraryList.innerHTML = exercises
+    .map((exercise) => {
+      const actions = `
+        <button class="outline exercise-card__details-btn" data-exercise-id="${exercise.id}">Details</button>
+        <button class="outline contrast library-delete-btn" data-exercise-id="${exercise.id}">Remove</button>`;
+      return renderExerciseCard(exercise, actions);
+    })
+    .join('');
+
+  attachLibraryDetailsButtons(exercises);
+  attachLibraryDeleteButtons();
+}
+
+function attachLibraryDetailsButtons(exercises) {
+  libraryList.querySelectorAll('.exercise-card__details-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const ex = exercises.find((e) => e.id === btn.dataset.exerciseId);
+      if (ex) showExerciseDetails(ex);
+    });
+  });
+}
+
+function attachLibraryDeleteButtons() {
+  libraryList.querySelectorAll('.library-delete-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      deleteExercise(btn.dataset.exerciseId);
+      renderLibrary();
+    });
+  });
+}
 
 searchForm?.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -108,10 +187,9 @@ async function fetchBaseResults(filters) {
     return getExercisesByEquipment(filters.equipment, PAGE_SIZE, 0);
   }
 
-  return getAllExercises(PAGE_SIZE, 0);
+  return apiGetAllExercises(PAGE_SIZE, 0);
 }
 
-/** Utility function to filter out exercises that does not meet the filters + query criteria */
 function applyClientFilters(exercises, filters) {
   return exercises.filter((exercise) => {
     const bodyPartMatches =
@@ -136,31 +214,42 @@ function renderResults(exercises) {
   }
 
   resultsList.innerHTML = exercises
-    .map(
-      (exercise) => `
-				<li class="results-list__item">
-          ${renderExerciseThumbnail(exercise)}
-					<div class="results-list__content">
-            <div class="results-list__info">
-              <h3 class="results-list__title">${capitalizeWords(exercise.name)}</h3>
-              <div class="results-list__meta">
-                <span><strong>Body Part:</strong> ${capitalizeWords(exercise.bodyPart)}</span>
-                <span><strong>Target:</strong> ${capitalizeWords(exercise.target)}</span>
-                <span><strong>Equipment:</strong> ${capitalizeWords(exercise.equipment)}</span>
-              </div>
-            </div>
-            <button class="results-list__details-btn" data-exercise-id="${exercise.id}">View Details</button>
-					</div>
-				</li>`
-    )
+    .map((exercise) => {
+      const isSaved = exerciseExists(exercise.id);
+      const saveAction = isSaved
+        ? '<span class="exercise-card__saved-badge">✓ In library</span>'
+        : `<button class="exercise-card__save-btn" data-exercise-id="${exercise.id}">+ Save</button>`;
+      const actions = `
+        <button class="outline exercise-card__details-btn" data-exercise-id="${exercise.id}">Details</button>
+        ${saveAction}`;
+      return renderExerciseCard(exercise, actions, { saved: isSaved });
+    })
     .join('');
 
   loadResultImages(exercises);
   attachDetailsButtons(exercises);
+  attachSaveButtons(exercises);
 
   setResultsStatus(
     `${exercises.length} exercise${exercises.length === 1 ? '' : 's'} found.`
   );
+}
+
+function attachSaveButtons(exercises) {
+  resultsList.querySelectorAll('.exercise-card__save-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const exercise = exercises.find((ex) => ex.id === btn.dataset.exerciseId);
+      if (exercise) {
+        saveFromApi(exercise);
+        btn
+          .closest('.exercise-card')
+          .classList.add('exercise-card--saved');
+        btn.outerHTML =
+          '<span class="exercise-card__saved-badge">✓ In library</span>';
+        renderLibrary();
+      }
+    });
+  });
 }
 
 function setResultsStatus(message) {
@@ -181,19 +270,6 @@ function populateSelect(selectElement, values) {
   selectElement.innerHTML = `<option value="">All</option>${options}`;
 }
 
-function renderExerciseThumbnail(exercise) {
-  if (exercise.id) {
-    return `<img
-					class="results-list__image results-list__image--placeholder"
-					data-exercise-id="${exercise.id}"
-					alt="${exercise.name}"
-					loading="lazy"
-				/>`;
-  }
-
-  return '<div class="results-list__image results-list__image--placeholder" aria-hidden="true"></div>';
-}
-
 async function loadResultImages(exercises) {
   const missingImages = exercises.filter((exercise) => exercise.id);
 
@@ -209,15 +285,15 @@ async function loadResultImages(exercises) {
       if (!imageElement) return;
 
       imageElement.src = imageUrl;
-      imageElement.classList.remove('results-list__image--placeholder');
+      imageElement.classList.remove('exercise-card__image--placeholder');
     } catch {
-      // I keep placeholder when image fetch fails.
+      // Keep placeholder when image fetch fails.
     }
   }
 }
 
 function attachDetailsButtons(exercises) {
-  const buttons = resultsList?.querySelectorAll('.results-list__details-btn');
+  const buttons = resultsList?.querySelectorAll('.exercise-card__details-btn');
   if (!buttons) return;
 
   buttons.forEach((btn) => {
@@ -231,6 +307,9 @@ function attachDetailsButtons(exercises) {
   });
 }
 
+// =====================
+// Shared: Exercise Details Dialog
+// =====================
 function showExerciseDetails(exercise) {
   const secondaryMuscles = exercise.secondaryMuscles?.length
     ? exercise.secondaryMuscles.map((m) => capitalizeWords(m)).join(', ')
@@ -280,3 +359,8 @@ function showExerciseDetails(exercise) {
   detailsDialog.setContent(contentHtml);
   detailsDialog.open();
 }
+
+// Init: render library on load
+document.addEventListener('DOMContentLoaded', () => {
+  renderLibrary();
+});
