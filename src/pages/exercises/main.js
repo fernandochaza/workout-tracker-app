@@ -80,8 +80,8 @@ function renderLibrary() {
   libraryList.innerHTML = exercises
     .map((exercise) => {
       const actions = `
-        <button class="outline exercise-card__details-btn" data-exercise-id="${exercise.id}">Details</button>
-        <button class="outline contrast library-delete-btn" data-exercise-id="${exercise.id}">Remove</button>`;
+        <button class="outline btn-small exercise-card__details-btn" data-exercise-id="${exercise.id}">Details</button>
+        <button class="outline contrast btn-small library-delete-btn" data-exercise-id="${exercise.id}">Remove</button>`;
       return renderExerciseCard(exercise, actions);
     })
     .join('');
@@ -219,7 +219,7 @@ function renderResults(exercises) {
         ? '<span class="exercise-card__saved-badge">✓ In library</span>'
         : `<button class="exercise-card__save-btn" data-exercise-id="${exercise.id}">+ Save</button>`;
       const actions = `
-        <button class="outline exercise-card__details-btn" data-exercise-id="${exercise.id}">Details</button>
+        <button class="outline btn-small exercise-card__details-btn" data-exercise-id="${exercise.id}">Details</button>
         ${saveAction}`;
       return renderExerciseCard(exercise, actions, { saved: isSaved });
     })

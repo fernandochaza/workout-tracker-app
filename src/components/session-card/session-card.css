@@ -1,0 +1,171 @@
+/* Session card — view mode */
+.session-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.session-card__edit-btn {
+  align-self: flex-end;
+}
+
+.session-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.session-card__header h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.session-card__day {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background-color: var(--surface-color);
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
+}
+
+.session-card__summary {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.session-card__exercises {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.session-card__exercises li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.session-exercise__name {
+  color: var(--text-primary);
+}
+
+.session-exercise__detail {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.session-exercise--empty {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+/* Session card — edit mode */
+.session-card--editing {
+  border-color: var(--primary-color);
+}
+
+.session-edit__exercise-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.session-edit__exercise-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.session-edit__exercise-row:last-child {
+  border-bottom: none;
+}
+
+.session-edit__exercise-name {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.session-edit__inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.session-edit__sets,
+.session-edit__reps {
+  width: 3rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.8rem;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+
+.session-edit__actions {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.session-edit__actions button {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 0.15rem 0.35rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.session-edit__actions button:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.session-edit__actions button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.session-edit__actions .session-edit__remove:hover:not(:disabled) {
+  border-color: var(--error-color);
+  color: var(--error-color);
+}
+
+.session-edit__add-btn {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.session-edit__footer {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}

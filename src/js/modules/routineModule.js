@@ -43,8 +43,16 @@ export function saveRoutine(input) {
   return routine;
 }
 
-// TODO
-// export function updateRoutine(id, updates) {}
+export function updateRoutine(id, updates) {
+  const routine = getRoutineById(id);
+  if (!routine) return null;
+
+  const updated = {
+    ...routine,
+    ...updates,
+  };
+  return saveRoutine(updated);
+}
 
 export function deleteRoutine(id) {
   const routines = getRoutinesCollection();
