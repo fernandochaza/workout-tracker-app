@@ -88,6 +88,7 @@ function renderLibrary() {
 
   attachLibraryDetailsButtons(exercises);
   attachLibraryDeleteButtons();
+  loadExerciseImages(exercises);
 }
 
 function attachLibraryDetailsButtons(exercises) {
@@ -225,7 +226,7 @@ function renderResults(exercises) {
     })
     .join('');
 
-  loadResultImages(exercises);
+  loadExerciseImages(exercises);
   attachDetailsButtons(exercises);
   attachSaveButtons(exercises);
 
@@ -267,19 +268,18 @@ function populateSelect(selectElement, values) {
   selectElement.innerHTML = `<option value="">All</option>${options}`;
 }
 
-async function loadResultImages(exercises) {
+async function loadExerciseImages(exercises) {
   const missingImages = exercises.filter((exercise) => exercise.id);
 
   for (const exercise of missingImages) {
     try {
       const imageBlob = await getExerciseImage(exercise.id);
       const imageUrl = URL.createObjectURL(imageBlob);
-      if (!resultsList) return;
 
-      const imageElement = resultsList.querySelector(
-        `[data-exercise-id="${exercise.id}"]`
+      const imageElement = document.querySelector(
+        `img[data-exercise-id="${exercise.id}"]`
       );
-      if (!imageElement) return;
+      if (!imageElement) continue;
 
       imageElement.src = imageUrl;
       imageElement.classList.remove('exercise-card__image--placeholder');
