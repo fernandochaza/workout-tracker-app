@@ -1,5 +1,4 @@
 import './header.css';
-import logoUrl from '../../assets/images/logo.svg';
 
 export function headerTemplate({
   variant = 'home',
@@ -8,10 +7,7 @@ export function headerTemplate({
 } = {}) {
   if (variant === 'home') {
     return `
-      <header class="header header--home">
-        <a href="/" class="header__logo">
-          <img src="${logoUrl}" alt="Workout Tracker" />
-        </a>
+      <header class="header header--page">
       </header>`;
   }
 

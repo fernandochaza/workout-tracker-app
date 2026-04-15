@@ -9,7 +9,7 @@
 }
 
 .header--page {
-  height: 80px;
+  height: 60px;
 }
 
 .header__logo img {
@@ -35,4 +35,8 @@
 
 .header--subpage .header__title {
   font-size: 0.9rem;
+}
+
+.header__title {
+  font-size: 1.5rem;
 }

@@ -5,21 +5,62 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/pages/home/main.css" />
 
     <title>Workout Tracker</title>
   </head>
 
   <body>
-    <div id="app">
-      <h2>Today's Session</h2>
-      <p>Welcome! Start logging your workouts below.</p>
-      <ul>
-        <li>Bench Press — 3x10</li>
-        <li>Squat — 4x8</li>
-        <li>Deadlift — 3x5</li>
-      </ul>
-    </div>
+    <article class="page-card home-page">
+      <section class="home-section" id="home-today-section">
+        <div class="home-section__header">
+          <h2>
+            Today's Sessions
+            <span id="home-today-day" class="home-today-day"></span>
+          </h2>
+        </div>
+        <div class="grid" id="home-today-list"></div>
+        <div
+          id="home-today-empty"
+          class="home-empty-state"
+          style="display: none"
+        >
+          <p>No sessions scheduled for today.</p>
+          <a href="/src/pages/routines/index.html">Go to Routines →</a>
+        </div>
+      </section>
+
+      <section class="home-section" id="home-routines-section">
+        <div class="home-section__header">
+          <h2>Active Routines</h2>
+          <a href="/src/pages/routines/index.html" class="home-section__link"
+            >View All →</a
+          >
+        </div>
+        <div class="grid" id="home-routines-list"></div>
+        <div
+          id="home-routines-empty"
+          class="home-empty-state"
+          style="display: none"
+        >
+          <p>No active routines yet.</p>
+          <a href="/src/pages/routines/index.html">Create a Routine →</a>
+        </div>
+      </section>
+
+      <section
+        id="home-quote-section"
+        class="home-section home-quote-section"
+        style="display: none"
+      >
+        <blockquote class="home-quote">
+          <p id="home-quote-text"></p>
+          <footer id="home-quote-author"></footer>
+        </blockquote>
+      </section>
+    </article>
   </body>
 
   <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/pages/home/main.js"></script>
 </html>

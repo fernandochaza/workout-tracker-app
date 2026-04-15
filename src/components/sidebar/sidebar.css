@@ -21,7 +21,7 @@
 
   .sidebar__header {
     display: flex;
-    height: 80px;
+    height: 60px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
@@ -100,11 +100,6 @@
   .sidebar__item:hover {
     color: var(--primary-color);
     background-color: var(--bg-color);
-  }
-
-  /* Home page header only has the logo — redundant on desktop since sidebar has it */
-  .header--home {
-    display: none;
   }
 
   /* Collapsed sidebar */

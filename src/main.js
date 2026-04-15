@@ -10,7 +10,7 @@ import { bottomNavTemplate } from './components/bottom-nav/bottom-nav.js';
 import { sidebarTemplate, initSidebar } from './components/sidebar/sidebar.js';
 import { initExerciseMeta } from './js/services/exerciseMetaService.js';
 
-const BROWSE_EXERCISES_PAGE = 'exercises';
+const EXERCISES_PAGE = 'exercises';
 const ROUTINES_PAGE = 'routines';
 
 document.documentElement.setAttribute('data-theme', 'light');
@@ -25,7 +25,7 @@ initSidebar();
 initExerciseMeta();
 
 function getPageState(pathname) {
-  if (pathname.includes(BROWSE_EXERCISES_PAGE)) {
+  if (pathname.includes(EXERCISES_PAGE)) {
     return {
       activePage: 'exercises',
       headerOptions: {
