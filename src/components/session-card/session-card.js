@@ -66,7 +66,12 @@ function renderSessionEditModeCard(session, editExercises) {
 
   return `
     <div class="session-card__header">
-      <h3>${capitalizeWords(session.name)}</h3>
+      <input
+        type="text"
+        value="${capitalizeWords(session.name)}"
+        placeholder="Session name"
+        aria-label="Session name"
+      />
       <span class="session-card__day">${dayLabel}</span>
     </div>
     <ul class="session-edit__exercise-list">${exerciseRows}</ul>
@@ -140,7 +145,9 @@ function bindEditModeEvents(card, session, editExercises, sessions) {
   card
     .querySelector('.session-edit__save-btn')
     .addEventListener('click', () => {
-      const updated = updateSession(session.id, { exercises: editExercises });
+      const nameInput = card.querySelector('.session-edit__name-input');
+      const name = nameInput?.value.trim() || session.name;
+      const updated = updateSession(session.id, { name, exercises: editExercises });
       if (updated) {
         Object.assign(session, updated);
       }

@@ -157,7 +157,7 @@ function createRoutine(dialog) {
   });
 
   currentCreateState.selectedDays.forEach((dayOfWeek, index) => {
-    const sessionName = `${DAY_NAMES[dayOfWeek]} Workout`;
+    const sessionName = `${DAY_NAMES[dayOfWeek]}`;
     saveSession({
       routineId: routine.id,
       name: sessionName,

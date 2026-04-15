@@ -89,7 +89,6 @@ function createRoutineCard(routine) {
   card.innerHTML = `
     <div class="routine-card-header">
       <h3>${capitalizeWords(routine.name)}</h3>
-      <span class="routine-status">${routine.status}</span>
     </div>
     <p class="routine-description">${routine.description || 'No description'}</p>
     <p class="routine-summary">${summary}</p>
@@ -122,7 +121,7 @@ function showRoutineDetail(routineId) {
         <h2>${capitalizeWords(routine.name)}</h2>
         <p class="routine-detail__description">${routine.description || 'No description'}</p>
       </div>
-      <span class="routine-status">${routine.status}</span>
+      <span class="routine-status routine-status--${routine.status}">${routine.status}</span>
     </div>
     <section class="routine-detail__sessions">
       <h3>Sessions</h3>

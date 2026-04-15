@@ -15,8 +15,9 @@
 .session-card__header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 0.35rem;
+  gap: 0.5rem;
 }
 
 .session-card__header h3 {
