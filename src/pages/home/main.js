@@ -88,6 +88,12 @@ function renderActiveRoutines() {
   }
 
   listEl.innerHTML = active.map(renderRoutineCard).join('');
+
+  listEl.querySelectorAll('.home-routine-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      window.location.href = `/src/pages/routines/index.html?routineId=${card.dataset.routineId}`;
+    });
+  });
 }
 
 function renderRoutineCard(routine) {
@@ -103,7 +109,7 @@ function renderRoutineCard(routine) {
     : 'No sessions';
 
   return `
-    <article class="home-routine-card">
+    <article class="home-routine-card" data-routine-id="${routine.id}">
       <div class="home-routine-card__header">
         <h3>${capitalizeWords(routine.name)}</h3>
       </div>

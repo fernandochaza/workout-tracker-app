@@ -26,6 +26,10 @@ const btnNewRoutine = document.querySelector('#btn-new-routine');
 document.addEventListener('DOMContentLoaded', () => {
   renderRoutines();
   setupEventListeners();
+
+  const params = new URLSearchParams(window.location.search);
+  const routineId = params.get('routineId');
+  if (routineId) showRoutineDetail(routineId);
 });
 
 function setupEventListeners() {
