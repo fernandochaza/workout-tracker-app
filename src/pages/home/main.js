@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderQuote();
 });
 
-
 function renderTodaySessions(appDay) {
   const listEl = document.querySelector('#home-today-list');
   const emptyEl = document.querySelector('#home-today-empty');
@@ -75,7 +74,6 @@ function renderTodaySessionCard(session, routine) {
     </article>`;
 }
 
-
 function renderActiveRoutines() {
   const listEl = document.querySelector('#home-routines-list');
   const emptyEl = document.querySelector('#home-routines-empty');
@@ -113,7 +111,6 @@ function renderRoutineCard(routine) {
       <p class="home-routine-card__summary">${summary}</p>
     </article>`;
 }
-
 
 async function renderQuote() {
   const sectionEl = document.querySelector('#home-quote-section');

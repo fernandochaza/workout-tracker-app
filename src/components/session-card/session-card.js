@@ -2,6 +2,7 @@ import './session-card.css';
 import { updateSession } from '../../js/modules/sessionModule.js';
 import { capitalizeWords } from '../../js/utils/string.js';
 import { DAY_NAMES } from '../../js/entities/session.js';
+import { openExercisePicker } from '../exercise-picker/exercise-picker.js';
 
 export function renderSessionViewModeCard(session) {
   const dayLabel =
@@ -67,6 +68,7 @@ function renderSessionEditModeCard(session, editExercises) {
   return `
     <div class="session-card__header">
       <input
+        class="session-edit__name-input"
         type="text"
         value="${capitalizeWords(session.name)}"
         placeholder="Session name"
@@ -134,6 +136,14 @@ function bindEditModeEvents(card, session, editExercises, sessions) {
     });
   });
 
+  card.querySelector('.session-edit__add-btn').addEventListener('click', () => {
+    openExercisePicker((exercise) => {
+      editExercises.push(exercise);
+      card.innerHTML = renderSessionEditModeCard(session, editExercises);
+      bindEditModeEvents(card, session, editExercises, sessions);
+    });
+  });
+
   card
     .querySelector('.session-edit__cancel-btn')
     .addEventListener('click', () => {
@@ -147,7 +157,10 @@ function bindEditModeEvents(card, session, editExercises, sessions) {
     .addEventListener('click', () => {
       const nameInput = card.querySelector('.session-edit__name-input');
       const name = nameInput?.value.trim() || session.name;
-      const updated = updateSession(session.id, { name, exercises: editExercises });
+      const updated = updateSession(session.id, {
+        name,
+        exercises: editExercises,
+      });
       if (updated) {
         Object.assign(session, updated);
       }

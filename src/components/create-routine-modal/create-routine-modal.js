@@ -168,7 +168,7 @@ function createRoutine(dialog) {
   });
 
   dialog.close();
-  if (onCreatedCallback) onCreatedCallback();
+  if (onCreatedCallback) onCreatedCallback(routine);
 }
 
 export function openCreateModal(onCreated) {

@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function setupEventListeners() {
   btnNewRoutine.addEventListener('click', () =>
-    openCreateModal(renderRoutines)
+    openCreateModal((routine) => showRoutineDetail(routine.id))
   );
 }
 

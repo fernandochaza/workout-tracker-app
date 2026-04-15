@@ -117,3 +117,25 @@
     height: 120px;
   }
 }
+
+/* Compact variant (no image, single-row) */
+.exercise-card--compact {
+  grid-template-columns: 1fr;
+}
+
+.exercise-card--compact .exercise-card__content {
+  flex-direction: row;
+  align-items: center;
+}
+
+.exercise-card--compact .exercise-card__title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.exercise-card__meta-inline {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 0.1rem 0 0;
+}
