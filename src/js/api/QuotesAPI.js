@@ -25,9 +25,12 @@ export async function getRandomQuote(categories = ['inspirational']) {
     : [categories].filter(Boolean);
 
   const categoriesParam = encodeURIComponent(list.join(','));
-  const res = await fetch(`${BASE_URL}/randomquotes?categories=${categoriesParam}`, {
-    headers,
-  });
+  const res = await fetch(
+    `${BASE_URL}/randomquotes?categories=${categoriesParam}`,
+    {
+      headers,
+    }
+  );
   if (!res.ok) throw new Error(`Quotes API error: ${res.status}`);
   const data = await res.json();
   return firstQuote(data);

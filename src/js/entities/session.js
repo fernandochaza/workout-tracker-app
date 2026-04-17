@@ -49,7 +49,9 @@ export function createSession(input = {}) {
     exercises: Array.isArray(input.exercises)
       ? input.exercises.map((exercise) => createSessionExercise(exercise))
       : [],
-    completedDates: Array.isArray(input.completedDates) ? input.completedDates : [],
+    completedDates: Array.isArray(input.completedDates)
+      ? input.completedDates
+      : [],
     createdAt: input.createdAt || Date.now(),
     updatedAt: input.updatedAt || Date.now(),
   };

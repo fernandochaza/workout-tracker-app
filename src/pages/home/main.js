@@ -81,7 +81,9 @@ function renderTodaySessions(appDay) {
 
 function renderTodaySessionCard(session, routine) {
   const exerciseCount = session.exercises.length;
-  const doneToday = (session.completedDates || []).some((d) => d.startsWith(todayISO()));
+  const doneToday = (session.completedDates || []).some((d) =>
+    d.startsWith(todayISO())
+  );
 
   const exerciseItems = exerciseCount
     ? session.exercises
