@@ -13,7 +13,12 @@ export const NAV_ITEMS = [
     href: '/src/pages/routines/index.html',
     icon: routinesIcon(),
   },
-  { label: 'Progress', href: '/progress.html', icon: progressIcon() },
+  {
+    label: 'Progress',
+    href: '/progress.html',
+    icon: progressIcon(),
+    hidden: true,
+  },
 ];
 
 function homeIcon() {

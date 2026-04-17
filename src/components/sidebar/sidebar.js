@@ -6,15 +6,17 @@ import { qs } from '../../js/utils/dom.js';
 const STORAGE_KEY = 'sidebar-collapsed';
 
 export function sidebarTemplate(activePage = 'home') {
-  const items = NAV_ITEMS.map(({ label, href, icon }) => {
-    const key = label.toLowerCase();
-    const isActive = key === activePage;
-    return `
+  const items = NAV_ITEMS.filter((item) => !item.hidden)
+    .map(({ label, href, icon }) => {
+      const key = label.toLowerCase();
+      const isActive = key === activePage;
+      return `
       <a href="${href}" class="sidebar__item${isActive ? ' sidebar__item--active' : ''}">
         ${icon}
         <span class="sidebar__item-label">${label}</span>
       </a>`;
-  }).join('');
+    })
+    .join('');
 
   return `
     <nav class="sidebar">
