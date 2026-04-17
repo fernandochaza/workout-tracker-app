@@ -135,7 +135,7 @@ function renderActiveRoutines() {
 
   listEl.querySelectorAll('.home-routine-card').forEach((card) => {
     card.addEventListener('click', () => {
-      window.location.href = `/src/pages/routines/index.html?routineId=${card.dataset.routineId}`;
+      window.location.href = `/src/pages/routine-detail/index.html?routineId=${card.dataset.routineId}`;
     });
   });
 }
