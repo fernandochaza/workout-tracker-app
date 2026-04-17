@@ -97,7 +97,7 @@
 }
 
 .home-btn-start {
-  align-self: stretch;
+  align-self: flex-end;
   margin-top: 0.25rem;
   background-color: var(--accent-color);
   border-color: var(--accent-color);

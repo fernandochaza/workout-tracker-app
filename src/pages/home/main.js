@@ -2,12 +2,22 @@ import './main.css';
 import {
   getSessionsByDay,
   getSessionsByRoutineId,
+  getSessionById,
+  updateSession,
 } from '../../js/modules/sessionModule.js';
 import { getAllRoutines } from '../../js/modules/routineModule.js';
 import { getQuoteOfTheDay } from '../../js/api/QuotesAPI.js';
 import { capitalizeWords } from '../../js/utils/string.js';
 import { DAY_NAMES } from '../../js/entities/session.js';
 import { qs } from '../../js/utils/dom.js';
+
+function todayISO() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function nowISO() {
+  return new Date().toISOString();
+}
 
 // This is because JavaScript's Date.getDay() returns 0=Sun, 1=Mon, …, 6=Sat
 // And I've configured the app's DAY_OF_WEEK to use 0=Mon, 1=Tue, …, 6=Sun
@@ -45,10 +55,27 @@ function renderTodaySessions(appDay) {
   listEl.innerHTML = sessions
     .map((s) => renderTodaySessionCard(s, routineMap.get(s.routineId)))
     .join('');
+
+  listEl.querySelectorAll('.home-btn-start:not([disabled])').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const session = getSessionById(btn.dataset.sessionId);
+      const alreadyDone = (session.completedDates || []).some((d) =>
+        d.startsWith(todayISO())
+      );
+      if (!session || alreadyDone) return;
+      updateSession(btn.dataset.sessionId, {
+        completedDates: [...(session.completedDates || []), nowISO()],
+      });
+      btn.textContent = 'Done ✓';
+      btn.classList.add('home-btn-start--done');
+      btn.disabled = true;
+    });
+  });
 }
 
 function renderTodaySessionCard(session, routine) {
   const exerciseCount = session.exercises.length;
+  const doneToday = (session.completedDates || []).some((d) => d.startsWith(todayISO()));
 
   const exerciseItems = exerciseCount
     ? session.exercises
@@ -73,8 +100,12 @@ function renderTodaySessionCard(session, routine) {
         ${exerciseCount ? `<span class="home-session__count">${exerciseCount} exercise${exerciseCount !== 1 ? 's' : ''}</span>` : ''}
       </div>
       <ul class="home-session__exercises">${exerciseItems}</ul>
-      <button class="home-btn-start" disabled title="Workout execution coming soon">
-        Start Workout
+      <button
+        class="home-btn-start${doneToday ? ' home-btn-start--done' : ''}"
+        data-session-id="${session.id}"
+        ${doneToday ? 'disabled' : ''}
+      >
+        ${doneToday ? 'Done ✓' : 'Mark as Done'}
       </button>
     </article>`;
 }
