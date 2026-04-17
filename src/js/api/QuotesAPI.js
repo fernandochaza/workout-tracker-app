@@ -5,6 +5,10 @@ const headers = {
   'X-Api-Key': API_KEY,
 };
 
+function firstQuote(data) {
+  return Array.isArray(data) ? (data[0] ?? null) : null;
+}
+
 export async function getQuotesByCategory(category) {
   const res = await fetch(
     `${BASE_URL}/quotes?categories=${encodeURIComponent(category)}`,
@@ -12,12 +16,26 @@ export async function getQuotesByCategory(category) {
   );
   if (!res.ok) throw new Error(`Quotes API error: ${res.status}`);
   const data = await res.json();
-  return data[0] ?? null;
+  return firstQuote(data);
+}
+
+export async function getRandomQuote(categories = ['inspirational']) {
+  const list = Array.isArray(categories)
+    ? categories.filter(Boolean)
+    : [categories].filter(Boolean);
+
+  const categoriesParam = encodeURIComponent(list.join(','));
+  const res = await fetch(`${BASE_URL}/randomquotes?categories=${categoriesParam}`, {
+    headers,
+  });
+  if (!res.ok) throw new Error(`Quotes API error: ${res.status}`);
+  const data = await res.json();
+  return firstQuote(data);
 }
 
 export async function getQuoteOfTheDay() {
   const res = await fetch(`${BASE_URL}/quoteoftheday`, { headers });
   if (!res.ok) throw new Error(`Quotes API error: ${res.status}`);
   const data = await res.json();
-  return data[0] ?? null;
+  return firstQuote(data);
 }

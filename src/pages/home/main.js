@@ -6,7 +6,7 @@ import {
   updateSession,
 } from '../../js/modules/sessionModule.js';
 import { getAllRoutines } from '../../js/modules/routineModule.js';
-import { getQuoteOfTheDay } from '../../js/api/QuotesAPI.js';
+import { getQuoteOfTheDay, getRandomQuote } from '../../js/api/QuotesAPI.js';
 import { capitalizeWords } from '../../js/utils/string.js';
 import { DAY_NAMES } from '../../js/entities/session.js';
 import { qs } from '../../js/utils/dom.js';
@@ -28,12 +28,17 @@ function getTodayAppDay() {
 
 document.addEventListener('DOMContentLoaded', () => {
   const today = getTodayAppDay();
+  const quoteRefreshBtn = qs('#home-quote-refresh');
 
   qs('#home-today-day').textContent = DAY_NAMES[today];
 
   renderTodaySessions(today);
   renderActiveRoutines();
   renderQuote();
+
+  quoteRefreshBtn?.addEventListener('click', () => {
+    renderQuote({ forceNew: true });
+  });
 });
 
 function renderTodaySessions(appDay) {
@@ -155,17 +160,32 @@ function renderRoutineCard(routine) {
     </article>`;
 }
 
-async function renderQuote() {
+async function renderQuote(options = {}) {
+  const { forceNew = false } = options;
   const sectionEl = qs('#home-quote-section');
+  const refreshBtn = qs('#home-quote-refresh');
+
+  if (refreshBtn) {
+    refreshBtn.disabled = true;
+    refreshBtn.classList.add('is-loading');
+  }
 
   try {
-    const quote = await getQuoteOfTheDay();
-    if (!quote?.quote) return;
+    const quote = forceNew
+      ? await getRandomQuote(['inspirational', 'success', 'wisdom'])
+      : await getQuoteOfTheDay();
+    const safeQuote = quote ?? (forceNew ? await getQuoteOfTheDay() : null);
+    if (!safeQuote?.quote) return;
 
-    qs('#home-quote-text').textContent = quote.quote;
-    qs('#home-quote-author').textContent = `— ${quote.author}`;
+    qs('#home-quote-text').textContent = safeQuote.quote;
+    qs('#home-quote-author').textContent = `— ${safeQuote.author}`;
     sectionEl.style.display = 'block';
   } catch {
     // Hide quote section on API failure
+  } finally {
+    if (refreshBtn) {
+      refreshBtn.disabled = false;
+      refreshBtn.classList.remove('is-loading');
+    }
   }
 }

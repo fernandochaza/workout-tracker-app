@@ -61,7 +61,8 @@ tabs.forEach((tab, index) => {
 
     // Arrow keys move between sibling tabs; Home/End jump to first/last.
     if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
-    if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+    if (event.key === 'ArrowLeft')
+      nextIndex = (index - 1 + tabs.length) % tabs.length;
     if (event.key === 'Home') nextIndex = 0;
     if (event.key === 'End') nextIndex = tabs.length - 1;
 
@@ -86,7 +87,7 @@ function activateTab(activeTab) {
     panel.hidden = panel.id !== activeTab.getAttribute('aria-controls');
   });
 
-          // Refresh library content when switching back to the library tab.
+  // Refresh library content when switching back to the library tab.
   if (activeTab.id === 'tab-my-library') {
     renderLibrary();
   }

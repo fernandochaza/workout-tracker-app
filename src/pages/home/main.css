@@ -49,6 +49,10 @@
   gap: 0.5rem;
 }
 
+.home-session-card {
+  height: 100%;
+}
+
 .home-routine-card {
   cursor: pointer;
 }
@@ -98,7 +102,7 @@
 
 .home-btn-start {
   align-self: flex-end;
-  margin-top: 0.25rem;
+  margin-top: auto;
   background-color: var(--accent-color);
   border-color: var(--accent-color);
   color: #fff;
@@ -136,6 +140,38 @@
 /* Quote of the Day */
 .home-quote-section {
   border-bottom: none;
+}
+
+.home-quote-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.home-quote-refresh {
+  margin: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-quote-refresh__icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.home-quote-refresh.is-loading .home-quote-refresh__icon {
+  animation: home-quote-spin 0.9s linear infinite;
+}
+
+@keyframes home-quote-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .home-quote {
