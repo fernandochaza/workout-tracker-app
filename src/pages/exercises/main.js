@@ -48,18 +48,49 @@ const resultsStatus = qs('#results-status');
 const PAGE_SIZE = 10;
 const detailsDialog = new DetailsDialog();
 
-tabs.forEach((tab) => {
+// ARIA tabs pattern: only the active tab is in the tab order.
+tabs.forEach((tab, index) => {
+  tab.tabIndex = tab.getAttribute('aria-selected') === 'true' ? 0 : -1;
+
   tab.addEventListener('click', () => {
-    tabs.forEach((t) => t.setAttribute('aria-selected', 'false'));
-    tab.setAttribute('aria-selected', 'true');
+    activateTab(tab);
+  });
 
-    panels.forEach((p) => (p.hidden = true));
-    const target = qs(`#${tab.getAttribute('aria-controls')}`);
-    if (target) target.hidden = false;
+  tab.addEventListener('keydown', (event) => {
+    let nextIndex = index;
 
-    if (tab.id === 'tab-library') renderLibrary();
+    // Arrow keys move between sibling tabs; Home/End jump to first/last.
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+    if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+    if (event.key === 'Home') nextIndex = 0;
+    if (event.key === 'End') nextIndex = tabs.length - 1;
+
+    if (nextIndex !== index) {
+      event.preventDefault();
+      tabs[nextIndex].focus();
+      activateTab(tabs[nextIndex]);
+    }
   });
 });
+
+function activateTab(activeTab) {
+  tabs.forEach((tab) => {
+    const isActive = tab === activeTab;
+    // Keep aria-selected and tabindex in sync for screen readers + keyboard users.
+    tab.setAttribute('aria-selected', String(isActive));
+    tab.tabIndex = isActive ? 0 : -1;
+  });
+
+  // Show only the panel referenced by aria-controls on the active tab.
+  panels.forEach((panel) => {
+    panel.hidden = panel.id !== activeTab.getAttribute('aria-controls');
+  });
+
+          // Refresh library content when switching back to the library tab.
+  if (activeTab.id === 'tab-my-library') {
+    renderLibrary();
+  }
+}
 
 librarySearch?.addEventListener('input', () => renderLibrary());
 

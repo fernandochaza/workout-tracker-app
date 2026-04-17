@@ -39,10 +39,19 @@
   font-weight: 600;
 }
 
-.tabs button:focus,
+.tabs button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tabs button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
 .tabs button:active {
   box-shadow: none;
-  --pico-border-color: transparent;
 }
 
 /* My Library */

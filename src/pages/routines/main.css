@@ -42,6 +42,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  text-decoration: none;
 }
 
 .routine-card-header {
@@ -83,5 +84,11 @@
 }
 
 .routine-card--clickable:hover {
+  border-color: var(--primary-color);
+}
+
+.routine-card--clickable:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
   border-color: var(--primary-color);
 }

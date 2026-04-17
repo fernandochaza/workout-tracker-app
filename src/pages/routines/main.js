@@ -68,8 +68,9 @@ function renderRoutines() {
 }
 
 function createRoutineCard(routine) {
-  const card = document.createElement('div');
+  const card = document.createElement('a');
   card.className = 'routine-card routine-card--clickable';
+  card.href = `${ROUTINE_DETAIL_URL}?routineId=${routine.id}`;
 
   const sessions = getSessionsByRoutineId(routine.id);
   const count = sessions.length;
@@ -89,10 +90,6 @@ function createRoutineCard(routine) {
     <p class="routine-description">${routine.description || 'No description'}</p>
     <p class="routine-summary">${summary}</p>
   `;
-
-  card.addEventListener('click', () => {
-    window.location.href = `${ROUTINE_DETAIL_URL}?routineId=${routine.id}`;
-  });
 
   return card;
 }
