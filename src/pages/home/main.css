@@ -104,6 +104,12 @@
   color: #fff;
 }
 
+.home-btn-start--done {
+  background-color: var(--text-secondary);
+  border-color: var(--text-secondary);
+  opacity: 0.7;
+}
+
 /* Active Routines */
 .home-routine-card__header {
   display: flex;

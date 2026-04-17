@@ -59,10 +59,11 @@ function renderTodaySessions(appDay) {
   listEl.querySelectorAll('.home-btn-start:not([disabled])').forEach((btn) => {
     btn.addEventListener('click', () => {
       const session = getSessionById(btn.dataset.sessionId);
+      if (!session) return;
       const alreadyDone = (session.completedDates || []).some((d) =>
         d.startsWith(todayISO())
       );
-      if (!session || alreadyDone) return;
+      if (alreadyDone) return;
       updateSession(btn.dataset.sessionId, {
         completedDates: [...(session.completedDates || []), nowISO()],
       });
