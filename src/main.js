@@ -13,6 +13,7 @@ import { seedDefaultExercises } from './js/modules/exerciseModule.js';
 
 const EXERCISES_PAGE = 'exercises';
 const ROUTINES_PAGE = 'routines';
+const ROUTINE_DETAIL_PAGE = 'routine-detail';
 
 document.documentElement.setAttribute('data-theme', 'light');
 
@@ -32,7 +33,7 @@ function getPageState(pathname) {
       activePage: 'exercises',
       headerOptions: {
         variant: 'page',
-        title: 'Browse Exercises',
+        title: 'Exercises',
       },
     };
   }
@@ -47,8 +48,18 @@ function getPageState(pathname) {
     };
   }
 
+  if (pathname.includes(ROUTINE_DETAIL_PAGE)) {
+    return {
+      activePage: 'routines',
+      headerOptions: {
+        variant: 'page',
+        title: 'Routine Detail',
+      },
+    };
+  }
+
   return {
     activePage: 'home',
-    headerOptions: { variant: 'home' },
+    headerOptions: { variant: 'page', title: 'Workout Tracker' },
   };
 }

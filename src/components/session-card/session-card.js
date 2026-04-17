@@ -110,8 +110,7 @@ function bindEditModeEvents(card, session, editExercises, sessions) {
   card.querySelectorAll('.session-edit__type').forEach((select) => {
     select.addEventListener('change', () => {
       const idx = parseInt(select.dataset.index);
-      editExercises[idx].type =
-        select.value === 'timed' ? 'timed' : 'reps';
+      editExercises[idx].type = select.value === 'timed' ? 'timed' : 'reps';
       card.innerHTML = renderSessionEditModeCard(session, editExercises);
       bindEditModeEvents(card, session, editExercises, sessions);
     });

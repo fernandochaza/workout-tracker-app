@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Workout Tracker home dashboard with today's sessions, active routines, and motivation."
+    />
+    <meta name="author" content="Fernando Chazarreta" />
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="stylesheet" href="/src/pages/home/main.css" />
 
@@ -11,7 +16,7 @@
   </head>
 
   <body>
-    <article class="page-card home-page">
+    <main class="page-card home-page">
       <section class="home-section" id="home-today-section">
         <div class="home-section__header">
           <h2>
@@ -53,12 +58,13 @@
         class="home-section home-quote-section"
         style="display: none"
       >
+        <h2 class="sr-only">Motivational Quote</h2>
         <blockquote class="home-quote">
           <p id="home-quote-text"></p>
           <footer id="home-quote-author"></footer>
         </blockquote>
       </section>
-    </article>
+    </main>
   </body>
 
   <script type="module" src="/src/main.js"></script>
