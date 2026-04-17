@@ -5,6 +5,16 @@ import { DAY_NAMES } from '../../js/entities/session.js';
 import { openExercisePicker } from '../exercise-picker/exercise-picker.js';
 import { qs } from '../../js/utils/dom.js';
 
+function formatExerciseDetail(exercise) {
+  const sets = exercise.plannedSets ?? 3;
+  if (exercise.type === 'timed') {
+    const duration = exercise.plannedDurationSeconds ?? 60;
+    return `${sets} × ${duration}s`;
+  }
+  const reps = exercise.plannedReps ?? 10;
+  return `${sets} × ${reps}`;
+}
+
 export function renderSessionViewModeCard(session) {
   const dayLabel =
     session.dayOfWeek !== null ? DAY_NAMES[session.dayOfWeek] : 'No day';
@@ -16,7 +26,7 @@ export function renderSessionViewModeCard(session) {
           (ex) =>
             `<li>
               <span class="session-exercise__name">${capitalizeWords(ex.name)}</span>
-              <span class="session-exercise__detail">${ex.plannedSets} × ${ex.plannedReps}</span>
+              <span class="session-exercise__detail">${formatExerciseDetail(ex)}</span>
             </li>`
         )
         .join('')
@@ -55,9 +65,17 @@ function renderSessionEditModeCard(session, editExercises) {
             `<li class="session-edit__exercise-row" data-index="${i}">
               <span class="session-edit__exercise-name">${capitalizeWords(ex.name)}</span>
               <div class="session-edit__inputs">
+                <select class="session-edit__type" data-index="${i}">
+                  <option value="reps" ${ex.type === 'reps' ? 'selected' : ''}>Reps</option>
+                  <option value="timed" ${ex.type === 'timed' ? 'selected' : ''}>Seconds</option>
+                </select>
                 <input type="number" class="session-edit__sets" value="${ex.plannedSets}" min="1" max="99" data-index="${i}" />
                 <span>×</span>
-                <input type="number" class="session-edit__reps" value="${ex.plannedReps}" min="1" max="999" data-index="${i}" />
+                ${
+                  ex.type === 'timed'
+                    ? `<input type="number" class="session-edit__duration" value="${ex.plannedDurationSeconds}" min="5" max="3600" step="5" data-index="${i}" /><span>s</span>`
+                    : `<input type="number" class="session-edit__reps" value="${ex.plannedReps}" min="1" max="999" data-index="${i}" />`
+                }
               </div>
               <div class="session-edit__actions">
                 <button class="session-edit__move-up" data-index="${i}" ${i === 0 ? 'disabled' : ''}>▲</button>
@@ -89,6 +107,16 @@ function renderSessionEditModeCard(session, editExercises) {
 }
 
 function bindEditModeEvents(card, session, editExercises, sessions) {
+  card.querySelectorAll('.session-edit__type').forEach((select) => {
+    select.addEventListener('change', () => {
+      const idx = parseInt(select.dataset.index);
+      editExercises[idx].type =
+        select.value === 'timed' ? 'timed' : 'reps';
+      card.innerHTML = renderSessionEditModeCard(session, editExercises);
+      bindEditModeEvents(card, session, editExercises, sessions);
+    });
+  });
+
   card.querySelectorAll('.session-edit__sets').forEach((input) => {
     input.addEventListener('change', () => {
       const idx = parseInt(input.dataset.index);
@@ -100,6 +128,13 @@ function bindEditModeEvents(card, session, editExercises, sessions) {
     input.addEventListener('change', () => {
       const idx = parseInt(input.dataset.index);
       editExercises[idx].plannedReps = parseInt(input.value) || 1;
+    });
+  });
+
+  card.querySelectorAll('.session-edit__duration').forEach((input) => {
+    input.addEventListener('change', () => {
+      const idx = parseInt(input.dataset.index);
+      editExercises[idx].plannedDurationSeconds = parseInt(input.value) || 60;
     });
   });
 
@@ -178,7 +213,13 @@ export function enterEditMode(session, sessions) {
   const card = qs(`.session-card[data-session-id="${session.id}"]`);
   if (!card) return;
 
-  const editExercises = session.exercises.map((ex) => ({ ...ex }));
+  const editExercises = session.exercises.map((ex) => ({
+    ...ex,
+    type: ex.type === 'timed' ? 'timed' : 'reps',
+    plannedSets: ex.plannedSets ?? 3,
+    plannedReps: ex.plannedReps ?? 10,
+    plannedDurationSeconds: ex.plannedDurationSeconds ?? 60,
+  }));
 
   card.classList.add('session-card--editing');
   card.innerHTML = renderSessionEditModeCard(session, editExercises);

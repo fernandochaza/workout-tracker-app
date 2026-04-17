@@ -41,7 +41,8 @@ function renderResults(query) {
           .map((ex) =>
             renderExerciseCard(
               ex,
-              `<button class="outline btn-small ep-add-btn" data-id="${ex.id}">+ Add</button>`,
+              `<button class="outline btn-small ep-add-btn" data-id="${ex.id}" data-type="reps">+ Reps</button>
+               <button class="outline btn-small ep-add-btn" data-id="${ex.id}" data-type="timed">+ Seconds</button>`,
               { compact: true }
             )
           )
@@ -53,6 +54,7 @@ function renderResults(query) {
     btn.addEventListener('click', () => {
       const ex = getAllExercises().find((e) => e.id === btn.dataset.id);
       if (!ex || !onSelectedCallback) return;
+      const type = btn.dataset.type === 'timed' ? 'timed' : 'reps';
       onSelectedCallback({
         exerciseId: ex.id,
         exerciseSource: ex.source,
@@ -60,8 +62,10 @@ function renderResults(query) {
         bodyPart: ex.bodyPart,
         target: ex.target,
         equipment: ex.equipment,
+        type,
         plannedSets: 3,
         plannedReps: 10,
+        plannedDurationSeconds: 60,
         notes: '',
       });
       pickerDialog.close();

@@ -56,7 +56,11 @@ function renderTodaySessionCard(session, routine) {
           (ex) =>
             `<li class="home-session__exercise">
               <span class="home-session__exercise-name">${capitalizeWords(ex.name)}</span>
-              <span class="home-session__exercise-detail">${ex.plannedSets} × ${ex.plannedReps}</span>
+              <span class="home-session__exercise-detail">${
+                ex.type === 'timed'
+                  ? `${ex.plannedSets ?? 3} × ${ex.plannedDurationSeconds ?? 60}s`
+                  : `${ex.plannedSets ?? 3} × ${ex.plannedReps ?? 10}`
+              }</span>
             </li>`
         )
         .join('')

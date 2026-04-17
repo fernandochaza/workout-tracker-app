@@ -1,6 +1,8 @@
 import { createId } from '../utils/id.js';
 
 function createSessionExercise(exercise = {}) {
+  const type = exercise.type === 'timed' ? 'timed' : 'reps';
+
   return {
     exerciseId: exercise.exerciseId || '',
     exerciseSource: exercise.exerciseSource || 'api',
@@ -8,8 +10,10 @@ function createSessionExercise(exercise = {}) {
     bodyPart: exercise.bodyPart || '',
     target: exercise.target || '',
     equipment: exercise.equipment || '',
-    plannedSets: exercise.plannedSets || 3,
-    plannedReps: exercise.plannedReps || 10,
+    type,
+    plannedSets: exercise.plannedSets ?? 3,
+    plannedReps: exercise.plannedReps ?? 10,
+    plannedDurationSeconds: exercise.plannedDurationSeconds ?? 60,
     notes: exercise.notes || '',
   };
 }

@@ -127,8 +127,10 @@
   color: var(--text-secondary);
 }
 
+.sessions-grid .session-edit__type,
 .sessions-grid .session-edit__sets,
-.sessions-grid .session-edit__reps {
+.sessions-grid .session-edit__reps,
+.sessions-grid .session-edit__duration {
   width: 3rem;
   padding: 0.2rem 0.3rem;
   font-size: 0.8rem;
@@ -139,6 +141,11 @@
   color: var(--text-primary);
   margin-bottom: 0;
   height: 40px;
+}
+
+.sessions-grid .session-edit__type {
+  width: 90px;
+  text-align: left;
 }
 
 .session-edit__actions {
