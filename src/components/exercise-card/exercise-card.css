@@ -30,6 +30,24 @@
   background-color: var(--bg-color);
 }
 
+.exercise-card__image--custom {
+  width: 70px;
+  height: 70px;
+  border: 1px dashed var(--border-color);
+  border-radius: calc(var(--radius) - 2px);
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exercise-card__image--custom::after {
+  content: '✱';
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  opacity: 0.4;
+}
+
 .exercise-card__content {
   min-width: 0;
   display: flex;
@@ -113,6 +131,11 @@
   }
 
   .exercise-card__image--placeholder {
+    width: 120px;
+    height: 120px;
+  }
+
+  .exercise-card__image--custom {
     width: 120px;
     height: 120px;
   }

@@ -50,6 +50,10 @@ export function renderExerciseCard(
 }
 
 function renderExerciseThumbnail(exercise) {
+  if (exercise.source === 'custom') {
+    return '<div class="exercise-card__image exercise-card__image--custom" aria-hidden="true"></div>';
+  }
+
   if (exercise.id) {
     return `<img
           class="exercise-card__image exercise-card__image--placeholder"

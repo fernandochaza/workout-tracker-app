@@ -4,6 +4,7 @@ import {
   STORAGE_KEYS,
 } from '../utils/storage.js';
 import { createExercise, EXERCISE_SOURCES } from '../entities/exercise.js';
+import { DEFAULT_EXERCISES } from '../data/defaultExercises.js';
 
 function getExercisesCollection() {
   try {
@@ -82,4 +83,12 @@ export function deleteExercise(id) {
 
 export function exerciseExists(id) {
   return getExerciseById(id) !== null;
+}
+
+export function seedDefaultExercises() {
+  if (getLocalStorage(STORAGE_KEYS.SEEDED_V1)) return;
+  DEFAULT_EXERCISES.forEach((ex) =>
+    saveExercise({ ...ex, source: EXERCISE_SOURCES.CUSTOM })
+  );
+  setLocalStorage(STORAGE_KEYS.SEEDED_V1, true);
 }

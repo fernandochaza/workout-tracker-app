@@ -11,4 +11,5 @@ export const STORAGE_KEYS = {
   COLLECTION_SESSIONS: 'app_sessions',
   COLLECTION_WORKOUT_LOGS: 'app_workout_logs',
   COLLECTION_EXERCISES: 'app_exercises',
+  SEEDED_V1: 'app_seeded_v1',
 };

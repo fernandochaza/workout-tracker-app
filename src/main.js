@@ -9,6 +9,7 @@ import { headerTemplate } from './components/header/header.js';
 import { bottomNavTemplate } from './components/bottom-nav/bottom-nav.js';
 import { sidebarTemplate, initSidebar } from './components/sidebar/sidebar.js';
 import { initExerciseMeta } from './js/services/exerciseMetaService.js';
+import { seedDefaultExercises } from './js/modules/exerciseModule.js';
 
 const EXERCISES_PAGE = 'exercises';
 const ROUTINES_PAGE = 'routines';
@@ -23,6 +24,7 @@ document.body.insertAdjacentHTML('beforeend', sidebarTemplate(activePage));
 
 initSidebar();
 initExerciseMeta();
+seedDefaultExercises();
 
 function getPageState(pathname) {
   if (pathname.includes(EXERCISES_PAGE)) {

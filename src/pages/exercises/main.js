@@ -18,6 +18,7 @@ import {
 import {
   getAllExercises as getLibraryExercises,
   saveFromApi,
+  saveExercise,
   deleteExercise,
   exerciseExists,
   searchExercises as searchLibrary,
@@ -268,9 +269,11 @@ function populateSelect(selectElement, values) {
 }
 
 async function loadExerciseImages(exercises) {
-  const missingImages = exercises.filter((exercise) => exercise.id);
+  const apiExercises = exercises.filter(
+    (ex) => ex.source !== 'custom' && ex.id
+  );
 
-  for (const exercise of missingImages) {
+  for (const exercise of apiExercises) {
     try {
       const imageBlob = await getExerciseImage(exercise.id);
       const imageUrl = URL.createObjectURL(imageBlob);
@@ -357,4 +360,43 @@ function showExerciseDetails(exercise) {
 // Init: render library on load
 document.addEventListener('DOMContentLoaded', () => {
   renderLibrary();
+  qs('#btn-add-custom')?.addEventListener('click', openAddCustomModal);
 });
+
+function openAddCustomModal() {
+  const dialog = new DetailsDialog();
+  dialog.setTitle('Add Custom Exercise');
+
+  const template = qs('#custom-exercise-form-template');
+  if (!template) return;
+  dialog.setContent(template.innerHTML);
+
+  qs('#custom-ex-cancel').addEventListener('click', () => dialog.close());
+
+  qs('#custom-ex-confirm').addEventListener('click', () => {
+    const name = qs('#custom-ex-name').value.trim();
+    const errorEl = qs('#custom-ex-error');
+    errorEl.style.display = 'none';
+
+    if (!name) {
+      errorEl.textContent = 'Please enter an exercise name.';
+      errorEl.style.display = '';
+      qs('#custom-ex-name').focus();
+      return;
+    }
+
+    saveExercise({
+      source: 'custom',
+      name,
+      bodyPart: qs('#custom-ex-body-part').value.trim(),
+      target: qs('#custom-ex-target').value.trim(),
+      equipment: qs('#custom-ex-equipment').value.trim(),
+      notes: qs('#custom-ex-notes').value.trim(),
+    });
+
+    dialog.close();
+    renderLibrary();
+  });
+
+  dialog.open();
+}

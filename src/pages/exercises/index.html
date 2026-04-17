@@ -119,6 +119,58 @@
           <ul id="results-list" class="exercise-card-list"></ul>
         </section>
       </section>
+
+      <template id="custom-exercise-form-template">
+        <div class="form-group">
+          <label for="custom-ex-name"
+            >Name <span aria-hidden="true">*</span></label
+          >
+          <input
+            id="custom-ex-name"
+            type="text"
+            placeholder="e.g. Bulgarian Split Squat"
+          />
+        </div>
+        <div class="form-group">
+          <label for="custom-ex-body-part">Body Part</label>
+          <input
+            id="custom-ex-body-part"
+            type="text"
+            placeholder="e.g. upper legs"
+          />
+        </div>
+        <div class="form-group">
+          <label for="custom-ex-target">Target Muscle</label>
+          <input id="custom-ex-target" type="text" placeholder="e.g. quads" />
+        </div>
+        <div class="form-group">
+          <label for="custom-ex-equipment">Equipment</label>
+          <input
+            id="custom-ex-equipment"
+            type="text"
+            placeholder="e.g. body weight, barbell"
+          />
+        </div>
+        <div class="form-group">
+          <label for="custom-ex-notes">Notes</label>
+          <textarea
+            id="custom-ex-notes"
+            rows="2"
+            placeholder="Optional notes"
+          ></textarea>
+        </div>
+        <p
+          id="custom-ex-error"
+          class="custom-ex-error"
+          style="display: none"
+        ></p>
+        <div class="custom-ex-footer">
+          <button id="custom-ex-cancel" class="secondary btn-small">
+            Cancel
+          </button>
+          <button id="custom-ex-confirm" class="btn-small">Add Exercise</button>
+        </div>
+      </template>
     </article>
   </body>
 
