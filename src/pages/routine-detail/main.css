@@ -1,0 +1,157 @@
+/* Routine status chip */
+.routine-status {
+  display: inline-block;
+  padding: 0.2rem 0.45rem;
+  background-color: var(--bg-color);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.routine-status--active {
+  color: var(--accent-color);
+  background-color: color-mix(in srgb, var(--accent-color) 10%, transparent);
+}
+
+.routine-status--inactive {
+  color: var(--text-secondary);
+}
+
+/* Back button */
+.btn-back {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-back:hover {
+  opacity: 0.8;
+}
+
+/* Routine detail header */
+.routine-detail__header {
+  margin-bottom: 0.5rem;
+}
+
+.routine-detail__title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.routine-detail__title-row h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.routine-detail__description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Sessions grid */
+.sessions-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Routine action bar */
+.routine-detail__actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  padding: 0.6rem 0;
+  margin-bottom: 1.25rem;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.routine-detail__delete-btn {
+  color: var(--error-color);
+  border-color: var(--error-color);
+  margin-left: auto;
+}
+
+.routine-detail__delete-btn:hover {
+  background-color: color-mix(in srgb, var(--error-color) 10%, transparent);
+}
+
+/* Edit routine form */
+.routine-edit-form {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.routine-edit-form .form-group {
+  margin-bottom: 0.75rem;
+}
+
+.routine-edit-form label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.routine-edit-form__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* Sessions section header */
+.sessions-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.sessions-section-header h3 {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Add session modal */
+.add-session-modal__error {
+  color: var(--error-color);
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem;
+}
+
+.add-session-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.sessions-section-header span[data-tooltip] {
+  border-bottom: none;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}

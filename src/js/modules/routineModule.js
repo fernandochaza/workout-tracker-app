@@ -4,6 +4,7 @@ import {
   STORAGE_KEYS,
 } from '../utils/storage.js';
 import { createRoutine } from '../entities/routine.js';
+import { deleteSessionsByRoutineId } from './sessionModule.js';
 
 function getRoutinesCollection() {
   try {
@@ -58,5 +59,5 @@ export function deleteRoutine(id) {
   const routines = getRoutinesCollection();
   const filtered = routines.filter((r) => r.id !== id);
   setRoutinesCollection(filtered);
-  // TODO: Clean up orphaned sessions via sessionModule when available
+  deleteSessionsByRoutineId(id);
 }

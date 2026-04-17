@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="./main.css" />
+
+    <title>Routine Detail - Workout Tracker</title>
+  </head>
+
+  <body>
+    <article class="page-card">
+      <div id="routine-detail-view">
+        <button id="btn-back-to-list" class="btn-back">
+          ← Back to Routines
+        </button>
+
+        <div class="routine-detail__header">
+          <div class="routine-detail__title-row">
+            <h2 id="routine-name"></h2>
+            <span id="routine-status" class="routine-status"></span>
+          </div>
+          <p id="routine-description" class="routine-detail__description"></p>
+        </div>
+
+        <div class="routine-detail__actions">
+          <button id="btn-toggle-status" class="outline btn-small"></button>
+          <button id="btn-edit-info" class="outline btn-small">Edit</button>
+          <button
+            id="btn-delete-routine"
+            class="outline btn-small routine-detail__delete-btn"
+          >
+            Delete
+          </button>
+        </div>
+
+        <div
+          id="routine-edit-form"
+          class="routine-edit-form"
+          style="display: none"
+        >
+          <div class="form-group">
+            <label for="edit-name">Name</label>
+            <input id="edit-name" type="text" />
+          </div>
+          <div class="form-group">
+            <label for="edit-description">Description</label>
+            <textarea id="edit-description" rows="3"></textarea>
+          </div>
+          <div class="routine-edit-form__footer">
+            <button id="btn-cancel-edit" class="secondary btn-small">
+              Cancel
+            </button>
+            <button id="btn-save-edit" class="btn-small">Save Changes</button>
+          </div>
+        </div>
+
+        <section class="routine-detail__sessions">
+          <div class="sessions-section-header">
+            <h3>Sessions</h3>
+            <span id="add-session-btn-wrapper" style="display: inline-block">
+              <button id="btn-add-session" class="outline btn-small">
+                + Add Session
+              </button>
+            </span>
+          </div>
+          <div id="sessions-grid" class="sessions-grid"></div>
+        </section>
+      </div>
+    </article>
+  </body>
+
+  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="main.js"></script>
+</html>

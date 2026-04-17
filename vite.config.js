@@ -7,6 +7,7 @@ export default defineConfig({
         home: 'index.html',
         exercises: 'src/pages/exercises/index.html',
         routines: 'src/pages/routines/index.html',
+        'routine-detail': 'src/pages/routine-detail/index.html',
       },
     },
   },

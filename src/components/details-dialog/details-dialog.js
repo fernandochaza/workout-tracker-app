@@ -1,4 +1,5 @@
 import './details-dialog.css';
+import { qs } from '../../js/utils/dom';
 
 export class DetailsDialog {
   constructor() {
@@ -8,7 +9,7 @@ export class DetailsDialog {
 
   init() {
     // Create dialog element if it doesn't exist
-    if (!document.querySelector('.details-dialog')) {
+    if (!qs('.details-dialog')) {
       this.dialog = document.createElement('dialog');
       this.dialog.className = 'details-dialog';
 
@@ -25,7 +26,7 @@ export class DetailsDialog {
       document.body.appendChild(this.dialog);
       this.attachEventListeners();
     } else {
-      this.dialog = document.querySelector('.details-dialog');
+      this.dialog = qs('.details-dialog');
       this.attachEventListeners();
     }
   }

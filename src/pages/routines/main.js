@@ -1,40 +1,32 @@
 import './main.css';
-import {
-  getAllRoutines,
-  getRoutineById,
-} from '../../js/modules/routineModule.js';
+import { getAllRoutines } from '../../js/modules/routineModule.js';
 import { getSessionsByRoutineId } from '../../js/modules/sessionModule.js';
 import { capitalizeWords } from '../../js/utils/string.js';
 import { DAY_NAMES } from '../../js/entities/session.js';
 import { openCreateModal } from '../../components/create-routine-modal/create-routine-modal.js';
-import {
-  renderSessionViewModeCard,
-  bindSessionEditButtons,
-} from '../../components/session-card/session-card.js';
+import { qs } from '../../js/utils/dom.js';
+
+const ROUTINE_DETAIL_URL = '../routine-detail/';
 
 // DOM Elements
-const listView = document.querySelector('#routines-list-view');
-const detailView = document.querySelector('#routine-detail-view');
-const activeRoutinesList = document.querySelector('#active-routines-list');
-const inactiveRoutinesList = document.querySelector('#inactive-routines-list');
-const activeSection = document.querySelector('#active-section');
-const inactiveSection = document.querySelector('#inactive-section');
-const emptyState = document.querySelector('#empty-state');
-const btnNewRoutine = document.querySelector('#btn-new-routine');
+const activeRoutinesList = qs('#active-routines-list');
+const inactiveRoutinesList = qs('#inactive-routines-list');
+const activeSection = qs('#active-section');
+const inactiveSection = qs('#inactive-section');
+const emptyState = qs('#empty-state');
+const btnNewRoutine = qs('#btn-new-routine');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
   renderRoutines();
   setupEventListeners();
-
-  const params = new URLSearchParams(window.location.search);
-  const routineId = params.get('routineId');
-  if (routineId) showRoutineDetail(routineId);
 });
 
 function setupEventListeners() {
   btnNewRoutine.addEventListener('click', () =>
-    openCreateModal((routine) => showRoutineDetail(routine.id))
+    openCreateModal((routine) => {
+      window.location.href = `${ROUTINE_DETAIL_URL}?routineId=${routine.id}`;
+    })
   );
 }
 
@@ -98,52 +90,9 @@ function createRoutineCard(routine) {
     <p class="routine-summary">${summary}</p>
   `;
 
-  card.addEventListener('click', () => showRoutineDetail(routine.id));
+  card.addEventListener('click', () => {
+    window.location.href = `${ROUTINE_DETAIL_URL}?routineId=${routine.id}`;
+  });
 
   return card;
-}
-
-function showRoutineDetail(routineId) {
-  const routine = getRoutineById(routineId);
-  if (!routine) return;
-
-  const sessions = getSessionsByRoutineId(routineId);
-
-  const sessionsHTML = sessions.length
-    ? sessions
-        .map(
-          (session) =>
-            `<div class="session-card" data-session-id="${session.id}">${renderSessionViewModeCard(session)}</div>`
-        )
-        .join('')
-    : '<p class="empty-state">No sessions in this routine.</p>';
-
-  detailView.innerHTML = `
-    <button id="btn-back-to-list" class="btn-back">← Back to Routines</button>
-    <div class="routine-detail__header">
-      <div>
-        <h2>${capitalizeWords(routine.name)}</h2>
-        <p class="routine-detail__description">${routine.description || 'No description'}</p>
-      </div>
-      <span class="routine-status routine-status--${routine.status}">${routine.status}</span>
-    </div>
-    <section class="routine-detail__sessions">
-      <h3>Sessions</h3>
-      <div class="sessions-grid">${sessionsHTML}</div>
-    </section>
-  `;
-
-  bindSessionEditButtons(sessions);
-
-  detailView
-    .querySelector('#btn-back-to-list')
-    .addEventListener('click', showListView);
-
-  listView.style.display = 'none';
-  detailView.style.display = 'block';
-}
-
-function showListView() {
-  detailView.style.display = 'none';
-  listView.style.display = 'block';
 }

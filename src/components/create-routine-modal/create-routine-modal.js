@@ -3,6 +3,7 @@ import { saveRoutine } from '../../js/modules/routineModule.js';
 import { saveSession } from '../../js/modules/sessionModule.js';
 import { DAY_NAMES } from '../../js/entities/session.js';
 import { DetailsDialog } from '../details-dialog/details-dialog.js';
+import { qs } from '../../js/utils/dom.js';
 
 let routineDialog = null;
 
@@ -107,7 +108,7 @@ function bindScreen2Events(dialog) {
 }
 
 function goToScreen2(dialog) {
-  const name = document.querySelector('#routine-name').value.trim();
+  const name = qs('#routine-name').value.trim();
   if (!name) {
     alert('Please enter a routine name');
     return;

@@ -3,6 +3,7 @@ import { updateSession } from '../../js/modules/sessionModule.js';
 import { capitalizeWords } from '../../js/utils/string.js';
 import { DAY_NAMES } from '../../js/entities/session.js';
 import { openExercisePicker } from '../exercise-picker/exercise-picker.js';
+import { qs } from '../../js/utils/dom.js';
 
 export function renderSessionViewModeCard(session) {
   const dayLabel =
@@ -28,7 +29,10 @@ export function renderSessionViewModeCard(session) {
     </div>
     ${exerciseCount ? `<p class="session-card__summary">${exerciseCount} exercise${exerciseCount !== 1 ? 's' : ''}</p>` : ''}
     <ul class="session-card__exercises">${exerciseList}</ul>
-    <button class="outline btn-small session-card__edit-btn" data-session-id="${session.id}">Edit</button>`;
+    <div class="session-card__footer">
+      <button class="outline btn-small session-card__delete-btn" data-session-id="${session.id}">Delete</button>
+      <button class="outline btn-small session-card__edit-btn" data-session-id="${session.id}">Edit</button>
+    </div>`;
 }
 
 export function bindSessionEditButtons(sessions) {
@@ -171,9 +175,7 @@ function bindEditModeEvents(card, session, editExercises, sessions) {
 }
 
 export function enterEditMode(session, sessions) {
-  const card = document.querySelector(
-    `.session-card[data-session-id="${session.id}"]`
-  );
+  const card = qs(`.session-card[data-session-id="${session.id}"]`);
   if (!card) return;
 
   const editExercises = session.exercises.map((ex) => ({ ...ex }));

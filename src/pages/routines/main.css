@@ -57,27 +57,6 @@
   color: var(--text-primary);
 }
 
-.routine-status {
-  display: inline-block;
-  padding: 0.2rem 0.45rem;
-  background-color: var(--bg-color);
-  color: var(--text-secondary);
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.routine-status--active {
-  color: var(--accent-color);
-  background-color: color-mix(in srgb, var(--accent-color) 10%, transparent);
-}
-
-.routine-status--inactive {
-  color: var(--text-secondary);
-}
-
 .routine-description {
   margin: 0;
   color: var(--text-secondary);
@@ -105,56 +84,4 @@
 
 .routine-card--clickable:hover {
   border-color: var(--primary-color);
-}
-
-/* Back button */
-.btn-back {
-  background: none;
-  border: none;
-  padding: 0;
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.btn-back:hover {
-  opacity: 0.8;
-}
-
-/* Routine detail header */
-.routine-detail__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
-}
-
-.routine-detail__header h2 {
-  margin: 0;
-  font-size: 1.1rem;
-  color: var(--text-primary);
-}
-
-.routine-detail__description {
-  margin: 0.25rem 0 0;
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-}
-
-/* Sessions grid in detail view */
-.routine-detail__sessions h3 {
-  margin: 0 0 0.75rem 0;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.sessions-grid {
-  display: grid;
-  gap: 0.75rem;
 }

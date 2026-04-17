@@ -8,8 +8,20 @@
   flex-direction: column;
 }
 
-.session-card__edit-btn {
-  align-self: flex-end;
+.session-card__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.session-card__delete-btn {
+  color: var(--error-color);
+  border-color: var(--error-color);
+}
+
+.session-card__delete-btn:hover {
+  background-color: color-mix(in srgb, var(--error-color) 10%, transparent);
 }
 
 .session-card__header {

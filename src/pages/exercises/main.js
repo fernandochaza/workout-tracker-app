@@ -23,25 +23,26 @@ import {
   searchExercises as searchLibrary,
 } from '../../js/modules/exerciseModule.js';
 import { capitalizeWords } from '../../js/utils/string.js';
+import { qs } from '../../js/utils/dom.js';
 
 // --- DOM: Tabs ---
 const tabs = document.querySelectorAll('[role="tab"]');
 const panels = document.querySelectorAll('[role="tabpanel"]');
 
 // --- DOM: My Library ---
-const librarySearch = document.querySelector('#library-search');
-const libraryList = document.querySelector('#library-list');
-const libraryStatus = document.querySelector('#library-status');
+const librarySearch = qs('#library-search');
+const libraryList = qs('#library-list');
+const libraryStatus = qs('#library-status');
 
 // --- DOM: Discover ---
-const searchForm = document.querySelector('#panel-discover form');
-const searchInput = document.querySelector('#search-input');
-const searchButton = document.querySelector('#search-button');
-const bodyPartSelect = document.querySelector('#filter-body-part');
-const targetMuscleSelect = document.querySelector('#filter-target-muscle');
-const equipmentSelect = document.querySelector('#filter-equipment');
-const resultsList = document.querySelector('#results-list');
-const resultsStatus = document.querySelector('#results-status');
+const searchForm = qs('#panel-discover form');
+const searchInput = qs('#search-input');
+const searchButton = qs('#search-button');
+const bodyPartSelect = qs('#filter-body-part');
+const targetMuscleSelect = qs('#filter-target-muscle');
+const equipmentSelect = qs('#filter-equipment');
+const resultsList = qs('#results-list');
+const resultsStatus = qs('#results-status');
 
 const PAGE_SIZE = 10;
 const detailsDialog = new DetailsDialog();
@@ -52,9 +53,7 @@ tabs.forEach((tab) => {
     tab.setAttribute('aria-selected', 'true');
 
     panels.forEach((p) => (p.hidden = true));
-    const target = document.querySelector(
-      `#${tab.getAttribute('aria-controls')}`
-    );
+    const target = qs(`#${tab.getAttribute('aria-controls')}`);
     if (target) target.hidden = false;
 
     if (tab.id === 'tab-library') renderLibrary();
@@ -276,9 +275,7 @@ async function loadExerciseImages(exercises) {
       const imageBlob = await getExerciseImage(exercise.id);
       const imageUrl = URL.createObjectURL(imageBlob);
 
-      const imageElement = document.querySelector(
-        `img[data-exercise-id="${exercise.id}"]`
-      );
+      const imageElement = qs(`img[data-exercise-id="${exercise.id}"]`);
       if (!imageElement) continue;
 
       imageElement.src = imageUrl;

@@ -7,6 +7,7 @@ import { getAllRoutines } from '../../js/modules/routineModule.js';
 import { getQuoteOfTheDay } from '../../js/api/QuotesAPI.js';
 import { capitalizeWords } from '../../js/utils/string.js';
 import { DAY_NAMES } from '../../js/entities/session.js';
+import { qs } from '../../js/utils/dom.js';
 
 // This is because JavaScript's Date.getDay() returns 0=Sun, 1=Mon, …, 6=Sat
 // And I've configured the app's DAY_OF_WEEK to use 0=Mon, 1=Tue, …, 6=Sun
@@ -18,7 +19,7 @@ function getTodayAppDay() {
 document.addEventListener('DOMContentLoaded', () => {
   const today = getTodayAppDay();
 
-  document.querySelector('#home-today-day').textContent = DAY_NAMES[today];
+  qs('#home-today-day').textContent = DAY_NAMES[today];
 
   renderTodaySessions(today);
   renderActiveRoutines();
@@ -26,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function renderTodaySessions(appDay) {
-  const listEl = document.querySelector('#home-today-list');
-  const emptyEl = document.querySelector('#home-today-empty');
+  const listEl = qs('#home-today-list');
+  const emptyEl = qs('#home-today-empty');
 
   const activeRoutines = getAllRoutines().filter((r) => r.status === 'active');
   const routineMap = new Map(activeRoutines.map((r) => [r.id, r]));
@@ -75,8 +76,8 @@ function renderTodaySessionCard(session, routine) {
 }
 
 function renderActiveRoutines() {
-  const listEl = document.querySelector('#home-routines-list');
-  const emptyEl = document.querySelector('#home-routines-empty');
+  const listEl = qs('#home-routines-list');
+  const emptyEl = qs('#home-routines-empty');
 
   const active = getAllRoutines()
     .filter((r) => r.status === 'active')
@@ -119,15 +120,14 @@ function renderRoutineCard(routine) {
 }
 
 async function renderQuote() {
-  const sectionEl = document.querySelector('#home-quote-section');
+  const sectionEl = qs('#home-quote-section');
 
   try {
     const quote = await getQuoteOfTheDay();
     if (!quote?.quote) return;
 
-    document.querySelector('#home-quote-text').textContent = quote.quote;
-    document.querySelector('#home-quote-author').textContent =
-      `— ${quote.author}`;
+    qs('#home-quote-text').textContent = quote.quote;
+    qs('#home-quote-author').textContent = `— ${quote.author}`;
     sectionEl.style.display = 'block';
   } catch {
     // Hide quote section on API failure

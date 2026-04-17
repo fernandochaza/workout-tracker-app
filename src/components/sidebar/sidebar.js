@@ -1,6 +1,7 @@
 import './sidebar.css';
 import logoUrl from '../../assets/images/logo.svg';
 import { NAV_ITEMS } from '../../js/nav-items.js';
+import { qs } from '../../js/utils/dom.js';
 
 const STORAGE_KEY = 'sidebar-collapsed';
 
@@ -31,7 +32,7 @@ export function sidebarTemplate(activePage = 'home') {
 }
 
 export function initSidebar() {
-  const sidebar = document.querySelector('.sidebar');
+  const sidebar = qs('.sidebar');
   if (!sidebar) return;
 
   const isCollapsed = localStorage.getItem(STORAGE_KEY) === 'true';
